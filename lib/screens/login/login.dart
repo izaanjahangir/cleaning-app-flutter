@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import "package:cleaning_app/config/theme_colors.dart";
 
 class Login extends StatelessWidget {
   @override
@@ -6,7 +7,7 @@ class Login extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          child: Text("Login"),
+          color: ThemeColors.yellow,
         ),
       ),
     );
