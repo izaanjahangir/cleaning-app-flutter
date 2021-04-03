@@ -1,3 +1,4 @@
+import 'package:cleaning_app/config/theme_colors.dart';
 import 'package:flutter/material.dart';
 
 class Button extends StatelessWidget {
@@ -10,7 +11,10 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onPressed,
-      child: Text(label),
+      child: Text(
+        label,
+        style: TextStyle(color: ThemeColors.white, fontSize: 18),
+      ),
     );
   }
 }
