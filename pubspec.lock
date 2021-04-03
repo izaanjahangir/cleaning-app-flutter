@@ -57,6 +57,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
+  flui:
+    dependency: "direct main"
+    description:
+      name: flui
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.9.2"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -67,6 +74,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  json_annotation:
+    dependency: transitive
+    description:
+      name: json_annotation
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.1"
   matcher:
     dependency: transitive
     description:
