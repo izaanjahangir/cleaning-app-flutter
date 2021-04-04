@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+
+import "package:cleaning_app/screens/home/home.dart";
 import "package:cleaning_app/config/theme_colors.dart";
 import "package:cleaning_app/components/text_input/text_input.dart";
 import "package:cleaning_app/components/button/button.dart";
 
 class Login extends StatelessWidget {
+  static String screenName = "login";
+
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -59,7 +63,9 @@ class Login extends StatelessWidget {
                           width: double.infinity,
                           child: Button(
                             label: "Login",
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamed(context, Home.screenName);
+                            },
                           )),
                     ],
                   ),
