@@ -4,11 +4,13 @@ import "package:cleaning_app/components/text_input/text_input.dart";
 import "package:cleaning_app/components/button/button.dart";
 
 class Login extends StatelessWidget {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final double width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -21,6 +23,14 @@ class Login extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
+                      Image.asset(
+                        "assets/icons/app-logo.png",
+                        width: width * 0.25,
+                        height: width * 0.25,
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
                       Text(
                         "We help you clean your home",
                         style: TextStyle(
