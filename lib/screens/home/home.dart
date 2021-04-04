@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import "package:cleaning_app/components/app_header/app_header.dart";
+
 class Home extends StatelessWidget {
   static String screenName = "home";
 
@@ -7,11 +9,8 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
-          child: Column(
-            children: [Text("Home")],
-          ),
+        child: Column(
+          children: [AppHeader(), Text("Home")],
         ),
       ),
     );
