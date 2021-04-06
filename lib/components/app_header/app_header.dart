@@ -18,7 +18,9 @@ class AppHeader extends StatelessWidget {
             child: Stack(
               children: [
                 TouchableOpacity(
-                  onTap: () {},
+                  onTap: () {
+                    Scaffold.of(context).openDrawer();
+                  },
                   activeOpacity: 0.1,
                   child: Icon(
                     Icons.menu,
