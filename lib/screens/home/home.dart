@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import "package:cleaning_app/screens/book_job_step_1/book_job_step_1.dart";
+import "package:cleaning_app/screens/your_jobs/your_jobs.dart";
+import "package:cleaning_app/screens/settings/settings.dart";
 import "package:cleaning_app/components/app_header/app_header.dart";
 import "package:cleaning_app/components/app_drawer/app_drawer.dart";
 import "package:cleaning_app/components/text_heading/text_heading.dart";
@@ -41,7 +43,9 @@ class Home extends StatelessWidget {
                         label: "Book Job",
                       ),
                       HomeOption(
-                        onTab: () {},
+                        onTab: () {
+                          Navigator.pushNamed(context, YourJobs.screenName);
+                        },
                         label: "Your Jobs",
                       ),
                     ],
@@ -52,7 +56,9 @@ class Home extends StatelessWidget {
                   Row(
                     children: [
                       HomeOption(
-                        onTab: () {},
+                        onTab: () {
+                          Navigator.pushNamed(context, Settings.screenName);
+                        },
                         label: "Settings",
                       ),
                       HomeOption(

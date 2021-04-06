@@ -22,7 +22,9 @@ class AppDrawer extends StatelessWidget {
             ),
             AppDrawerItem(
               label: "Home",
-              onTap: () {},
+              onTap: () {
+                // Navigator.restorablePush(context, (context, arguments) => null)
+              },
             ),
           ],
         ),
