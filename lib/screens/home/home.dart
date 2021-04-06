@@ -38,7 +38,6 @@ class Home extends StatelessWidget {
                     height: 30,
                   ),
                   Row(
-                    mainAxisSize: MainAxisSize.min,
                     children: [
                       HomeOption(
                         label: "Book Job",
@@ -52,7 +51,6 @@ class Home extends StatelessWidget {
                     height: 10,
                   ),
                   Row(
-                    mainAxisSize: MainAxisSize.min,
                     children: [
                       HomeOption(
                         label: "Settings",

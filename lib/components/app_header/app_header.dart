@@ -8,7 +8,7 @@ class AppHeader extends StatelessWidget {
     final double height = MediaQuery.of(context).size.height;
 
     return Container(
-      color: ThemeColors.yellow,
+      color: ThemeColors.blue,
       width: double.infinity,
       height: height * 0.08,
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
@@ -23,7 +23,7 @@ class AppHeader extends StatelessWidget {
                   child: Icon(
                     Icons.menu,
                     size: height * 0.06,
-                    color: ThemeColors.black,
+                    color: ThemeColors.white,
                   ),
                 ),
                 Container(
