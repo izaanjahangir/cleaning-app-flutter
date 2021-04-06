@@ -4,14 +4,16 @@ import 'package:touchable_opacity/touchable_opacity.dart';
 
 class HomeOption extends StatelessWidget {
   final String label;
+  final Function onTab;
 
-  HomeOption({@required this.label});
+  HomeOption({@required this.label, @required this.onTab});
 
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
 
     return TouchableOpacity(
+      onTap: onTab,
       child: Container(
         width: width * 0.45,
         height: width * 0.45,

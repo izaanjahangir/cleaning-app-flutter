@@ -1,6 +1,7 @@
 import 'package:cleaning_app/config/theme_colors.dart';
 import 'package:flutter/material.dart';
 
+import "package:cleaning_app/screens/book_job_step_1/book_job_step_1.dart";
 import "package:cleaning_app/components/app_header/app_header.dart";
 import "package:cleaning_app/screens/home/home_option.dart";
 
@@ -40,9 +41,13 @@ class Home extends StatelessWidget {
                   Row(
                     children: [
                       HomeOption(
+                        onTab: () {
+                          Navigator.pushNamed(context, BookJobStep1.screenName);
+                        },
                         label: "Book Job",
                       ),
                       HomeOption(
+                        onTab: () {},
                         label: "Your Jobs",
                       ),
                     ],
@@ -53,9 +58,11 @@ class Home extends StatelessWidget {
                   Row(
                     children: [
                       HomeOption(
+                        onTab: () {},
                         label: "Settings",
                       ),
                       HomeOption(
+                        onTab: () {},
                         label: "Promotions",
                       ),
                     ],
