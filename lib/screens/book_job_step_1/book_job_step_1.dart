@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import "package:cleaning_app/components/app_header/app_header.dart";
 import "package:cleaning_app/screens/home/home_option.dart";
+import "package:cleaning_app/components/text_heading/text_heading.dart";
 
 class BookJobStep1 extends StatelessWidget {
   static String screenName = "book-job-step-1";
@@ -20,7 +21,13 @@ class BookJobStep1 extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 // crossAxisAlignment: CrossAxisAlignment.start,
-                children: [],
+                children: [
+                  TextHeading(
+                    textAlign: TextAlign.center,
+                    label: "How many bedrooms you want to clean?",
+                    size: "medium",
+                  )
+                ],
               ),
             )
           ],
