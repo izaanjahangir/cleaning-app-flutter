@@ -1,3 +1,4 @@
+import 'package:cleaning_app/components/app_drawer/app_drawer.dart';
 import 'package:flutter/material.dart';
 
 import "package:cleaning_app/components/app_header/app_header.dart";
@@ -16,51 +17,55 @@ class _BookJobStep1State extends State<BookJobStep1> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AppHeader(),
-            Container(
-              margin: const EdgeInsets.only(top: 20),
-              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                // crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextHeading(
-                    textAlign: TextAlign.center,
-                    label: "How many bedrooms you want to clean?",
-                    size: "medium",
-                  ),
-                  Container(
-                      margin: const EdgeInsets.symmetric(vertical: 15),
-                      child: Counter(
-                        onAdd: () {
-                          setState(() {
-                            amount += 1;
-                          });
-                        },
-                        onSubstract: () {
-                          setState(() {
-                            amount -= 1;
-                          });
-                        },
-                        amount: amount,
-                      )),
-                  Container(
-                    margin: const EdgeInsets.only(top: 10),
-                    child: TextHeading(
+    return SafeArea(
+      child: Scaffold(
+        drawer: AppDrawer(),
+        body: SafeArea(
+          child: Column(
+            // crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AppHeader(),
+              Container(
+                margin: const EdgeInsets.only(top: 20),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  // crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TextHeading(
                       textAlign: TextAlign.center,
-                      label: "Extras to add",
+                      label: "How many bedrooms you want to clean?",
                       size: "medium",
                     ),
-                  ),
-                ],
-              ),
-            )
-          ],
+                    Container(
+                        margin: const EdgeInsets.symmetric(vertical: 15),
+                        child: Counter(
+                          onAdd: () {
+                            setState(() {
+                              amount += 1;
+                            });
+                          },
+                          onSubstract: () {
+                            setState(() {
+                              amount -= 1;
+                            });
+                          },
+                          amount: amount,
+                        )),
+                    Container(
+                      margin: const EdgeInsets.only(top: 10),
+                      child: TextHeading(
+                        textAlign: TextAlign.center,
+                        label: "Extras to add",
+                        size: "medium",
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
