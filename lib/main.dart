@@ -4,6 +4,7 @@ import "package:cleaning_app/screens/home/home.dart";
 import "package:cleaning_app/screens/book_job_step_1/book_job_step_1.dart";
 import "package:cleaning_app/screens/your_jobs/your_jobs.dart";
 import "package:cleaning_app/screens/settings/settings.dart";
+import "package:cleaning_app/screens/profile/profile.dart";
 
 void main() {
   runApp(MyApp());
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         BookJobStep1.screenName: (context) => BookJobStep1(),
         YourJobs.screenName: (context) => YourJobs(),
         Settings.screenName: (context) => Settings(),
+        Profile.screenName: (context) => Profile(),
       },
     );
   }

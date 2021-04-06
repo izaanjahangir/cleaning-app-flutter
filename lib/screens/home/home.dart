@@ -13,6 +13,8 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("Route name => " + ModalRoute.of(context).settings.name);
+
     return SafeArea(
       child: Scaffold(
         drawer: AppDrawer(),
