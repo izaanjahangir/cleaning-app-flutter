@@ -58,8 +58,8 @@ class _BookJobStep1State extends State<BookJobStep1> {
               ),
               Text("Home Details",
                   style: TextStyle(
-                      fontSize: 20,
-                      color: ThemeColors.black,
+                      fontSize: 26,
+                      color: ThemeColors.blue,
                       fontWeight: FontWeight.bold)),
               Expanded(
                 child: Container(
