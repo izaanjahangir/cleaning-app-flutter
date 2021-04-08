@@ -5,15 +5,20 @@ class TextInput extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final Function validator;
+  final int maxLength;
 
-  TextInput({this.controller, this.hintText, this.validator});
+  TextInput({this.controller, this.hintText, this.validator, this.maxLength});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 3),
       child: TextFormField(
+        buildCounter: (BuildContext context,
+                {int currentLength, int maxLength, bool isFocused}) =>
+            null,
         controller: controller,
+        maxLength: maxLength,
         style: TextStyle(
           fontSize: 16,
           color: ThemeColors.black,

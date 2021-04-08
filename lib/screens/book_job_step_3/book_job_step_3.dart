@@ -1,6 +1,7 @@
 import 'package:cleaning_app/components/app_drawer/app_drawer.dart';
 import 'package:cleaning_app/components/button/button.dart';
 import 'package:cleaning_app/config/theme_colors.dart';
+import 'package:cleaning_app/screens/add_card/add_card.dart';
 import 'package:cleaning_app/screens/book_job_step_3/details.dart';
 import 'package:cleaning_app/screens/book_job_step_3/select_card_section.dart';
 import 'package:cleaning_app/utils/helpers.dart';
@@ -25,13 +26,15 @@ class _BookJobStep3State extends State<BookJobStep3> {
   ];
   Map selectedCard;
 
-  Widget renderChipButton() {
+  Widget renderChipButton(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: Material(
         color: ThemeColors.blue,
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).pushNamed(AddCard.screenName);
+          },
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
             child: Row(
@@ -110,7 +113,7 @@ class _BookJobStep3State extends State<BookJobStep3> {
                                     SizedBox(
                                       width: 10,
                                     ),
-                                    renderChipButton()
+                                    renderChipButton(context)
                                   ],
                                 ),
                                 SizedBox(

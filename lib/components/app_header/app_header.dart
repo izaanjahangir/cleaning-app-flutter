@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:touchable_opacity/touchable_opacity.dart';
 
 class AppHeader extends StatelessWidget {
+  final bool showBackIcon;
+  final bool showDrawerIcon;
+
+  AppHeader({this.showBackIcon = false, this.showDrawerIcon = true});
+
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
@@ -13,30 +18,39 @@ class AppHeader extends StatelessWidget {
       height: height * 0.08,
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(
-            child: Stack(
-              children: [
-                TouchableOpacity(
-                  onTap: () {
-                    Scaffold.of(context).openDrawer();
-                  },
-                  activeOpacity: 0.1,
-                  child: Icon(
-                    Icons.menu,
-                    size: height * 0.06,
-                    color: ThemeColors.white,
-                  ),
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  child: Image.asset(
-                    "assets/icons/app-logo.png",
-                  ),
-                )
-              ],
+          if (showDrawerIcon)
+            TouchableOpacity(
+              onTap: () {
+                Scaffold.of(context).openDrawer();
+              },
+              activeOpacity: 0.1,
+              child: Icon(
+                Icons.menu,
+                size: height * 0.05,
+                color: ThemeColors.white,
+              ),
             ),
-          )
+          if (showBackIcon)
+            TouchableOpacity(
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              activeOpacity: 0.1,
+              child: Icon(
+                Icons.arrow_back,
+                size: height * 0.05,
+                color: ThemeColors.white,
+              ),
+            ),
+          Expanded(
+              child: Container(
+            alignment: Alignment.center,
+            child: Image.asset(
+              "assets/icons/app-logo.png",
+            ),
+          ))
         ],
       ),
     );
