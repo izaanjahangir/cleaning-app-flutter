@@ -5,9 +5,15 @@ class TextInput extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final Function validator;
+
   final int maxLength;
 
-  TextInput({this.controller, this.hintText, this.validator, this.maxLength});
+  TextInput({
+    this.controller,
+    this.hintText,
+    this.validator,
+    this.maxLength,
+  });
 
   @override
   Widget build(BuildContext context) {

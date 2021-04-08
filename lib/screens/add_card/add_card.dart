@@ -1,5 +1,7 @@
 import 'package:cleaning_app/components/app_drawer/app_drawer.dart';
 import 'package:cleaning_app/components/text_input/text_input.dart';
+import 'package:cleaning_app/components/date_input/date_input.dart';
+import 'package:cleaning_app/utils/date_helpers.dart';
 import 'package:cleaning_app/utils/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
@@ -16,7 +18,42 @@ class AddCard extends StatefulWidget {
 
 class _AddCardState extends State<AddCard> {
   final TextEditingController numberController = TextEditingController();
+  final TextEditingController cvvController = TextEditingController();
+  final TextEditingController holderNameController = TextEditingController();
   CreditCard card = new CreditCard();
+  bool showBackView = false;
+
+  @override
+  void initState() {
+    numberController.addListener(() {
+      setState(() {
+        card.number = numberController.text;
+      });
+    });
+
+    holderNameController.addListener(() {
+      setState(() {
+        card.holderName = holderNameController.text;
+      });
+    });
+
+    cvvController.addListener(() {
+      setState(() {
+        card.cvv = cvvController.text;
+      });
+    });
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    numberController.dispose();
+    holderNameController.dispose();
+    cvvController.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +83,7 @@ class _AddCardState extends State<AddCard> {
                           expiryDate: card.expiryDate,
                           cardHolderName: card.holderName,
                           cvvCode: card.cvv,
-                          showBackView:
-                              false, //true when you want to show cvv(back) view
+                          showBackView: showBackView,
                         ),
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -64,20 +100,38 @@ class _AddCardState extends State<AddCard> {
                               Row(
                                 children: [
                                   Expanded(
-                                    child: TextInput(
-                                      maxLength: 16,
-                                      controller: numberController,
-                                      hintText: "Number",
+                                    child: DateInput(
+                                      onDateSelect: (DateTime newDateTime) {
+                                        setState(() {
+                                          card.expiryDate =
+                                              DateHelpers.format(newDateTime);
+                                        });
+                                      },
+                                      date: DateHelpers.toDateTime(
+                                          card.expiryDate),
                                     ),
                                   ),
                                   SizedBox(
                                     width: 10,
                                   ),
                                   Expanded(
-                                    child: TextInput(
-                                      maxLength: 16,
-                                      controller: numberController,
-                                      hintText: "Number",
+                                    child: Focus(
+                                      onFocusChange: (hasFocus) {
+                                        if (hasFocus) {
+                                          setState(() {
+                                            showBackView = true;
+                                          });
+                                        } else {
+                                          setState(() {
+                                            showBackView = false;
+                                          });
+                                        }
+                                      },
+                                      child: TextInput(
+                                        maxLength: 3,
+                                        controller: cvvController,
+                                        hintText: "CVV",
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -87,9 +141,9 @@ class _AddCardState extends State<AddCard> {
                               ),
                               TextInput(
                                 maxLength: 16,
-                                controller: numberController,
-                                hintText: "Number",
-                              )
+                                controller: holderNameController,
+                                hintText: "Card Holder Name",
+                              ),
                             ],
                           ),
                         )
