@@ -1,6 +1,7 @@
 import 'package:cleaning_app/components/app_drawer/app_drawer.dart';
 import 'package:cleaning_app/components/button/button.dart';
 import 'package:cleaning_app/config/theme_colors.dart';
+import 'package:cleaning_app/screens/book_job_step_2/book_job_step_2.dart';
 import 'package:flutter/material.dart';
 
 import "package:cleaning_app/components/app_header/app_header.dart";
@@ -112,8 +113,13 @@ class _BookJobStep1State extends State<BookJobStep1> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Button(onPressed: () {}, label: "Back"),
-                    Button(onPressed: () {}, label: "Next")
+                    Button(disabled: true, onPressed: () {}, label: "Back"),
+                    Button(
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed(BookJobStep2.screenName);
+                        },
+                        label: "Next")
                   ],
                 ),
               )
