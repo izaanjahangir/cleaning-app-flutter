@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import "package:cleaning_app/components/app_header/app_header.dart";
+import 'package:touchable_opacity/touchable_opacity.dart';
 
 class BookJobStep3 extends StatefulWidget {
   static String screenName = "book-job-step-3";
@@ -23,6 +24,33 @@ class _BookJobStep3State extends State<BookJobStep3> {
     {"id": 2, "number": "4111111111111111", "holderName": "izaan jahangir"},
   ];
   Map selectedCard;
+
+  Widget renderChipButton() {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(10),
+      child: Material(
+        color: ThemeColors.blue,
+        child: InkWell(
+          onTap: () {},
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+            child: Row(
+              children: [
+                Text("Add More",
+                    style: TextStyle(fontSize: 10, color: ThemeColors.white)),
+                TouchableOpacity(
+                    child: Icon(
+                  Icons.add,
+                  size: 14,
+                  color: ThemeColors.white,
+                ))
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,14 +95,23 @@ class _BookJobStep3State extends State<BookJobStep3> {
                               children: [
                                 Details(),
                                 SizedBox(
-                                  height: 10,
+                                  height: 15,
                                 ),
-                                Text(
-                                  "Pay via card",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Pay via card",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    renderChipButton()
+                                  ],
                                 ),
                                 SizedBox(
                                   height: 10,
