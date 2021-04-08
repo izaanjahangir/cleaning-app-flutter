@@ -27,7 +27,9 @@ class AppDrawerItem extends StatelessWidget {
               child: Center(
                   child: Text(
                 label,
-                style: TextStyle(fontSize: 18, color: ThemeColors.black),
+                style: TextStyle(
+                    fontSize: 18,
+                    color: active ? ThemeColors.black : ThemeColors.white),
               ))),
         ),
       ),
