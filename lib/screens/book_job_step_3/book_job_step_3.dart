@@ -1,6 +1,7 @@
 import 'package:cleaning_app/components/app_drawer/app_drawer.dart';
 import 'package:cleaning_app/components/button/button.dart';
 import 'package:cleaning_app/config/theme_colors.dart';
+import 'package:cleaning_app/screens/book_job_step_3/details.dart';
 import 'package:cleaning_app/utils/helpers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -49,10 +50,25 @@ class _BookJobStep3State extends State<BookJobStep3> {
                                   color: ThemeColors.blue,
                                   fontWeight: FontWeight.bold)),
                           Container(
-                            margin: const EdgeInsets.only(top: 20),
-                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            width: double.infinity,
+                            margin: const EdgeInsets.only(top: 10),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 20),
                             child: Column(
-                              children: [],
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Details(),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  "Pay via card",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
                             ),
                           ),
                         ],
