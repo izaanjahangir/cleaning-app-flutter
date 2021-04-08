@@ -1,9 +1,11 @@
 import 'package:cleaning_app/components/app_drawer/app_drawer.dart';
 import 'package:cleaning_app/components/button/button.dart';
 import 'package:cleaning_app/config/theme_colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import "package:cleaning_app/components/app_header/app_header.dart";
+import "package:cleaning_app/components/text_area/text_area.dart";
 
 class BookJobStep2 extends StatefulWidget {
   static String screenName = "book-job-step-2";
@@ -40,10 +42,35 @@ class _BookJobStep2State extends State<BookJobStep2> {
               Expanded(
                 child: Container(
                   margin: const EdgeInsets.only(top: 20),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
                   child: Column(
-                    children: [],
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 10),
+                        child: PhysicalModel(
+                          color: ThemeColors.black,
+                          elevation: 3,
+                          child: Container(
+                            color: ThemeColors.white,
+                            height: 150,
+                            child: CupertinoDatePicker(
+                                onDateTimeChanged: (DateTime newDate) {}),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        "Instructions",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      Container(
+                          margin: const EdgeInsets.only(top: 10),
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: TextArea())
+                    ],
                   ),
                 ),
               ),
