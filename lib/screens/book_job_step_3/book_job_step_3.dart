@@ -2,6 +2,7 @@ import 'package:cleaning_app/components/app_drawer/app_drawer.dart';
 import 'package:cleaning_app/components/button/button.dart';
 import 'package:cleaning_app/config/theme_colors.dart';
 import 'package:cleaning_app/screens/book_job_step_3/details.dart';
+import 'package:cleaning_app/screens/book_job_step_3/select_card_section.dart';
 import 'package:cleaning_app/utils/helpers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,13 @@ class BookJobStep3 extends StatefulWidget {
 }
 
 class _BookJobStep3State extends State<BookJobStep3> {
+  List<Map> cards = [
+    {"id": 0, "number": "4111111111111111", "holderName": "izaan jahangir"},
+    {"id": 1, "number": "4111111111111111", "holderName": "izaan jahangir"},
+    {"id": 2, "number": "4111111111111111", "holderName": "izaan jahangir"},
+  ];
+  Map selectedCard;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -67,6 +75,18 @@ class _BookJobStep3State extends State<BookJobStep3> {
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                SelectCardSection(
+                                  cards: cards,
+                                  selected: selectedCard,
+                                  onSelect: (Map selectedItem) {
+                                    setState(() {
+                                      selectedCard = selectedItem;
+                                    });
+                                  },
                                 )
                               ],
                             ),
