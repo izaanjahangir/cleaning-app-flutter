@@ -113,7 +113,11 @@ class _BookJobStep1State extends State<BookJobStep1> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Button(disabled: true, onPressed: () {}, label: "Back"),
+                    Button(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        label: "Back"),
                     Button(
                         onPressed: () {
                           Navigator.of(context)
