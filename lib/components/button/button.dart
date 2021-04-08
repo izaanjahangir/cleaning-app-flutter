@@ -11,9 +11,12 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onPressed,
-      child: Text(
-        label,
-        style: TextStyle(color: ThemeColors.white, fontSize: 18),
+      child: FittedBox(
+        fit: BoxFit.fitWidth,
+        child: Text(
+          label,
+          style: TextStyle(color: ThemeColors.white, fontSize: 18),
+        ),
       ),
     );
   }

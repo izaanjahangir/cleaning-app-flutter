@@ -1,4 +1,6 @@
 import 'package:cleaning_app/components/app_drawer/app_drawer.dart';
+import 'package:cleaning_app/components/button/button.dart';
+import 'package:cleaning_app/config/theme_colors.dart';
 import 'package:flutter/material.dart';
 
 import "package:cleaning_app/components/app_header/app_header.dart";
@@ -43,48 +45,75 @@ class _BookJobStep1State extends State<BookJobStep1> {
           child: Column(
             children: [
               AppHeader(),
-              Container(
-                margin: const EdgeInsets.only(top: 20),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    TextHeading(
-                      textAlign: TextAlign.center,
-                      label: "How many bedrooms you want to clean?",
-                      size: "medium",
-                    ),
-                    Container(
-                        margin: const EdgeInsets.symmetric(vertical: 15),
-                        child: Counter(
-                          onAdd: () {
-                            setState(() {
-                              amount += 1;
-                            });
-                          },
-                          onSubstract: () {
-                            setState(() {
-                              amount -= 1;
-                            });
-                          },
-                          amount: amount,
-                        )),
-                    Container(
-                      margin: const EdgeInsets.only(top: 10),
-                      child: TextHeading(
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                "Step 1 of 3",
+                style: TextStyle(
+                    fontSize: 20,
+                    color: ThemeColors.black,
+                    fontWeight: FontWeight.bold),
+              ),
+              Text("Home Details",
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: ThemeColors.black,
+                      fontWeight: FontWeight.bold)),
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.only(top: 20),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Column(
+                    children: [
+                      TextHeading(
                         textAlign: TextAlign.center,
-                        label: "Extras to add",
+                        label: "How many bedrooms you want to clean?",
                         size: "medium",
                       ),
-                    ),
-                    Container(
-                        margin: const EdgeInsets.symmetric(vertical: 15),
-                        child: Extras(
-                          values: extras,
-                          selected: selectedExtras,
-                          onSelect: handleExtraSelect,
-                        ))
+                      Container(
+                          margin: const EdgeInsets.symmetric(vertical: 15),
+                          child: Counter(
+                            onAdd: () {
+                              setState(() {
+                                amount += 1;
+                              });
+                            },
+                            onSubstract: () {
+                              setState(() {
+                                amount -= 1;
+                              });
+                            },
+                            amount: amount,
+                          )),
+                      Container(
+                        margin: const EdgeInsets.only(top: 10),
+                        child: TextHeading(
+                          textAlign: TextAlign.center,
+                          label: "Extras to add",
+                          size: "medium",
+                        ),
+                      ),
+                      Container(
+                          margin: const EdgeInsets.symmetric(vertical: 15),
+                          child: Extras(
+                            values: extras,
+                            selected: selectedExtras,
+                            onSelect: handleExtraSelect,
+                          ))
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                margin: const EdgeInsets.only(bottom: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Button(onPressed: () {}, label: "Back"),
+                    Button(onPressed: () {}, label: "Next")
                   ],
                 ),
               )
