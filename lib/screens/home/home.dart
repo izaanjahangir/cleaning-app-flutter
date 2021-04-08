@@ -13,20 +13,16 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("Route name => " + ModalRoute.of(context).settings.name);
-
     return SafeArea(
       child: Scaffold(
         drawer: AppDrawer(),
         body: Column(
-          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AppHeader(),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
                     height: 10,

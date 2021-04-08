@@ -1,10 +1,10 @@
 import 'package:cleaning_app/components/app_drawer/app_drawer.dart';
-import 'package:cleaning_app/screens/your_jobs/your_jobs.dart';
 import 'package:flutter/material.dart';
 
 import "package:cleaning_app/components/app_header/app_header.dart";
 import "package:cleaning_app/components/text_heading/text_heading.dart";
 import "package:cleaning_app/screens/book_job_step_1/counter.dart";
+import "package:cleaning_app/screens/book_job_step_1/extras.dart";
 
 class BookJobStep1 extends StatefulWidget {
   static String screenName = "book-job-step-1";
@@ -15,6 +15,24 @@ class BookJobStep1 extends StatefulWidget {
 
 class _BookJobStep1State extends State<BookJobStep1> {
   int amount = 0;
+  final List<Map> extras = [
+    {"id": 0, "name": "Living Room"},
+    {"id": 1, "name": "Kitchen"},
+    {"id": 2, "name": "Bathroom"}
+  ];
+  final List<int> selectedExtras = [];
+
+  void handleExtraSelect(Map selectedItem) {
+    int selectedIndex = selectedExtras.indexOf(selectedItem["id"]);
+
+    setState(() {
+      if (selectedIndex == -1) {
+        selectedExtras.add(selectedItem["id"]);
+      } else {
+        selectedExtras.removeAt(selectedIndex);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,16 +41,14 @@ class _BookJobStep1State extends State<BookJobStep1> {
         drawer: AppDrawer(),
         body: SafeArea(
           child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AppHeader(),
               Container(
                 margin: const EdgeInsets.only(top: 20),
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextHeading(
                       textAlign: TextAlign.center,
@@ -62,6 +78,13 @@ class _BookJobStep1State extends State<BookJobStep1> {
                         size: "medium",
                       ),
                     ),
+                    Container(
+                        margin: const EdgeInsets.symmetric(vertical: 15),
+                        child: Extras(
+                          values: extras,
+                          selected: selectedExtras,
+                          onSelect: handleExtraSelect,
+                        ))
                   ],
                 ),
               )
