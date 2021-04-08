@@ -65,6 +65,8 @@ class _BookJobStep2State extends State<BookJobStep2> {
                                       color: ThemeColors.white,
                                       height: 150,
                                       child: CupertinoDatePicker(
+                                          mode: CupertinoDatePickerMode
+                                              .dateAndTime,
                                           onDateTimeChanged:
                                               (DateTime newDate) {}),
                                     ),
