@@ -18,21 +18,30 @@ class BookJobStep4 extends StatefulWidget {
 
 class _BookJobStep4State extends State<BookJobStep4> {
   Completer<GoogleMapController> _controller = Completer();
+  Set<Marker> markers = {};
 
   static final CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
     zoom: 14.4746,
   );
 
-  Future<void> goToLocation(double latitde, double longitude) async {
-    final CameraPosition _kLake = CameraPosition(
+  Future<void> goToLocation(double latitde, double longitude,
+      {bool shouldNotZoom = false}) async {
+    final GoogleMapController controller = await _controller.future;
+    double zoom;
+
+    if (shouldNotZoom) {
+      zoom = await controller.getZoomLevel();
+    } else {
+      zoom = 19.151926040649414;
+    }
+
+    CameraPosition cameraPosition = CameraPosition(
         bearing: 192.8334901395799,
         target: LatLng(latitde, longitude),
-        zoom: 19.151926040649414);
+        zoom: zoom);
 
-    final GoogleMapController controller = await _controller.future;
-
-    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
+    controller.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
   }
 
   @override
@@ -45,11 +54,35 @@ class _BookJobStep4State extends State<BookJobStep4> {
   void getCurrentLocation() async {
     try {
       var p = await Location.determinePosition();
+      GoogleMapController controller;
+
+      if (_controller.isCompleted) {
+        controller = await _controller.future;
+      }
 
       goToLocation(p.latitude, p.longitude);
+      Marker currentLocationMarker = Marker(
+          markerId: MarkerId("current-location-marker"),
+          infoWindow: InfoWindow(
+              title: "Your Location", snippet: "We will come at this location"),
+          position: LatLng(p.latitude, p.longitude));
+
+      setState(() {
+        markers.add(currentLocationMarker);
+      });
+
+      if (_controller != null) {
+        await Future.delayed(Duration(seconds: 1));
+        controller.showMarkerInfoWindow(MarkerId("current-location-marker"));
+      }
     } catch (e) {
       print("some error " + e.toString());
     }
+  }
+
+  void centerMap() {
+    final Marker marker = markers.elementAt(0);
+    goToLocation(marker.position.latitude, marker.position.longitude);
   }
 
   @override
@@ -92,16 +125,40 @@ class _BookJobStep4State extends State<BookJobStep4> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               SizedBox(
-                                height: height * 0.5,
+                                height: height * 0.45,
                                 width: double.infinity,
                                 child: GoogleMap(
                                   mapType: MapType.normal,
                                   myLocationEnabled: true,
                                   myLocationButtonEnabled: true,
                                   initialCameraPosition: _kGooglePlex,
+                                  onTap: (LatLng coordinates) {
+                                    Marker currentLocationMarker = Marker(
+                                        markerId:
+                                            MarkerId("current-location-marker"),
+                                        infoWindow: InfoWindow(
+                                            title: "Your Location",
+                                            snippet:
+                                                "We will come at this location"),
+                                        position: LatLng(coordinates.latitude,
+                                            coordinates.longitude));
+
+                                    setState(() {
+                                      markers.clear();
+                                      markers.add(currentLocationMarker);
+                                    });
+
+                                    _controller.future
+                                        .then((GoogleMapController controller) {
+                                      controller.showMarkerInfoWindow(
+                                          MarkerId("current-location-marker"));
+                                    });
+                                  },
+                                  markers: markers,
                                   onMapCreated:
                                       (GoogleMapController controller) {
                                     _controller.complete(controller);
+                                    print(markers.toString());
                                   },
                                 ),
                               ),
@@ -109,11 +166,13 @@ class _BookJobStep4State extends State<BookJobStep4> {
                                 margin: const EdgeInsets.only(top: 10),
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 20),
-                                child: Button(
-                                    onPressed: () {
-                                      // _goToTheLake();
-                                    },
-                                    label: "Select this location"),
+                                child: Column(
+                                  children: [
+                                    Button(
+                                        onPressed: centerMap,
+                                        label: "Center the map")
+                                  ],
+                                ),
                               )
                             ],
                           ),
