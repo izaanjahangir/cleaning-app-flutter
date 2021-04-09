@@ -1,5 +1,7 @@
 PODS:
   - Flutter (1.0.0)
+  - geolocator (6.2.0):
+    - Flutter
   - google_maps_flutter (0.0.1):
     - Flutter
     - GoogleMaps (< 3.10)
@@ -11,6 +13,7 @@ PODS:
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
+  - geolocator (from `.symlinks/plugins/geolocator/ios`)
   - google_maps_flutter (from `.symlinks/plugins/google_maps_flutter/ios`)
 
 SPEC REPOS:
@@ -20,11 +23,14 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
+  geolocator:
+    :path: ".symlinks/plugins/geolocator/ios"
   google_maps_flutter:
     :path: ".symlinks/plugins/google_maps_flutter/ios"
 
 SPEC CHECKSUMS:
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  geolocator: f5e3de65e241caba7ce3e8a618803387bda73384
   google_maps_flutter: c7f9c73576de1fbe152a227bfd6e6c4ae8088619
   GoogleMaps: 4b5346bddfe6911bb89155d43c903020170523ac
 

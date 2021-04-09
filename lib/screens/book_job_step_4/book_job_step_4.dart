@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
+import "package:cleaning_app/utils/location.dart";
 
 import "package:cleaning_app/components/app_header/app_header.dart";
 
@@ -23,19 +24,38 @@ class _BookJobStep4State extends State<BookJobStep4> {
     zoom: 14.4746,
   );
 
-  static final CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
-      tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
+  Future<void> goToLocation(double latitde, double longitude) async {
+    final CameraPosition _kLake = CameraPosition(
+        bearing: 192.8334901395799,
+        target: LatLng(latitde, longitude),
+        zoom: 19.151926040649414);
 
-  Future<void> _goToTheLake() async {
     final GoogleMapController controller = await _controller.future;
+
     controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
   }
 
   @override
+  void initState() {
+    getCurrentLocation();
+
+    super.initState();
+  }
+
+  void getCurrentLocation() async {
+    try {
+      var p = await Location.determinePosition();
+
+      goToLocation(p.latitude, p.longitude);
+    } catch (e) {
+      print("some error " + e.toString());
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final double height = MediaQuery.of(context).size.height;
+
     return SafeArea(
       child: Scaffold(
         drawer: AppDrawer(),
@@ -67,21 +87,33 @@ class _BookJobStep4State extends State<BookJobStep4> {
                           width: double.infinity,
                           margin: const EdgeInsets.only(top: 10),
                           padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 20),
+                              vertical: 10, horizontal: 0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               SizedBox(
-                                height: 200,
+                                height: height * 0.5,
                                 width: double.infinity,
                                 child: GoogleMap(
-                                  mapType: MapType.hybrid,
+                                  mapType: MapType.normal,
+                                  myLocationEnabled: true,
+                                  myLocationButtonEnabled: true,
                                   initialCameraPosition: _kGooglePlex,
                                   onMapCreated:
                                       (GoogleMapController controller) {
                                     _controller.complete(controller);
                                   },
                                 ),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.only(top: 10),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: Button(
+                                    onPressed: () {
+                                      // _goToTheLake();
+                                    },
+                                    label: "Select this location"),
                               )
                             ],
                           ),
