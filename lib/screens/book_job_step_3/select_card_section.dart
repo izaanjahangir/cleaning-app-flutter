@@ -1,6 +1,7 @@
 import 'package:cleaning_app/config/theme_colors.dart';
 import 'package:cleaning_app/utils/formatter.dart';
 import "package:flutter/material.dart";
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SelectCardSection extends StatelessWidget {
   final List<Map> cards;
@@ -26,25 +27,32 @@ class SelectCardSection extends StatelessWidget {
             onTap: () {
               onSelect(item);
             },
-            child: Row(
-              children: [
-                AbsorbPointer(
-                  child: Radio(
-                    value: item["id"],
-                    groupValue: selected == null ? null : selected["id"],
-                    onChanged: (value) {
-                      int selectedIndex =
-                          cards.indexWhere((element) => element["id"] == value);
+            child: Container(
+              padding: const EdgeInsets.only(right: 10),
+              child: Row(
+                children: [
+                  AbsorbPointer(
+                    child: Radio(
+                      value: item["id"],
+                      groupValue: selected == null ? null : selected["id"],
+                      onChanged: (value) {
+                        int selectedIndex = cards
+                            .indexWhere((element) => element["id"] == value);
 
-                      onSelect(cards[selectedIndex]);
-                    },
+                        onSelect(cards[selectedIndex]);
+                      },
+                    ),
                   ),
-                ),
-                Text(
-                  Formatter.formatCreditCard(item["number"]),
-                  style: TextStyle(fontSize: 16),
-                ),
-              ],
+                  Expanded(
+                    child: Text(
+                      Formatter.formatCreditCard(item["number"]),
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ),
+                  SvgPicture.asset("assets/icons/credit-card.svg",
+                      width: 25, semanticsLabel: 'Acme Logo')
+                ],
+              ),
             ),
           ),
         ),
