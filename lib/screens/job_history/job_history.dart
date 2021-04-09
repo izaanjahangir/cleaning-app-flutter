@@ -1,3 +1,4 @@
+import 'package:cleaning_app/screens/job_history_details/job_history_details.dart';
 import 'package:flutter/material.dart';
 
 import "package:cleaning_app/components/app_header/app_header.dart";
@@ -31,7 +32,7 @@ class JobHistory extends StatelessWidget {
         body: SafeArea(
           child: Column(
             children: [
-              AppHeader(),
+              AppHeader(showBackIcon: true),
               Expanded(
                 child: SingleChildScrollView(
                   child: Container(
@@ -45,7 +46,14 @@ class JobHistory extends StatelessWidget {
                           child: Column(
                             children: [
                               ...jobs
-                                  .map((e) => JobHistoryItem(item: e))
+                                  .map((e) => JobHistoryItem(
+                                        item: e,
+                                        onTab: (Job selectedJob) {
+                                          Navigator.of(context).pushNamed(
+                                              JobHistoryDetails.screenName,
+                                              arguments: {"data": selectedJob});
+                                        },
+                                      ))
                                   .toList()
                             ],
                           ),

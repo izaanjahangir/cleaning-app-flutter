@@ -22,8 +22,8 @@ class Details extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-        color: ThemeColors.lightGrey,
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        color: ThemeColors.lightestGrey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

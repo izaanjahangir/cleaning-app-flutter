@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:cleaning_app/components/app_drawer/app_drawer.dart';
 import 'package:cleaning_app/components/button/button.dart';
 import 'package:cleaning_app/config/theme_colors.dart';
@@ -5,7 +6,6 @@ import 'package:cleaning_app/screens/book_job_step_4/book_job_step_4.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'dart:async';
 import "package:cleaning_app/utils/location.dart";
 
 import "package:cleaning_app/components/app_header/app_header.dart";
@@ -21,7 +21,7 @@ class _BookJobStep3State extends State<BookJobStep3> {
   Completer<GoogleMapController> _controller = Completer();
   Set<Marker> markers = {};
 
-  static final CameraPosition _kGooglePlex = CameraPosition(
+  static final CameraPosition initialCameraPosition = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
     zoom: 14.4746,
   );
@@ -132,7 +132,7 @@ class _BookJobStep3State extends State<BookJobStep3> {
                                   mapType: MapType.normal,
                                   myLocationEnabled: true,
                                   myLocationButtonEnabled: true,
-                                  initialCameraPosition: _kGooglePlex,
+                                  initialCameraPosition: initialCameraPosition,
                                   onTap: (LatLng coordinates) {
                                     Marker currentLocationMarker = Marker(
                                         markerId:

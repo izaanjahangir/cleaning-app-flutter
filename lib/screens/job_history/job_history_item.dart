@@ -5,8 +5,9 @@ import 'package:touchable_opacity/touchable_opacity.dart';
 
 class JobHistoryItem extends StatelessWidget {
   final Job item;
+  final Function onTab;
 
-  JobHistoryItem({this.item});
+  JobHistoryItem({@required this.item, @required this.onTab});
 
   Widget renderDateChip() {
     return ClipRRect(
@@ -37,7 +38,9 @@ class JobHistoryItem extends StatelessWidget {
         color: ThemeColors.white,
         child: InkWell(
           borderRadius: BorderRadius.circular(20),
-          onTap: () {},
+          onTap: () {
+            onTab(item);
+          },
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
             width: double.infinity,
@@ -56,7 +59,7 @@ class JobHistoryItem extends StatelessWidget {
                 SizedBox(
                   width: 10,
                 ),
-                TouchableOpacity(child: Icon(Icons.arrow_forward))
+                Icon(Icons.arrow_forward)
               ],
             ),
           ),
