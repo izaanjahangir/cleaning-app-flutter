@@ -23,6 +23,7 @@ class Home extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
                     height: 10,
@@ -33,6 +34,7 @@ class Home extends StatelessWidget {
                     height: 30,
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       HomeOption(
                         onTab: () {
@@ -52,6 +54,7 @@ class Home extends StatelessWidget {
                     height: 10,
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       HomeOption(
                         onTab: () {
