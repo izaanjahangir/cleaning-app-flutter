@@ -50,7 +50,7 @@ class _BookJobStep1State extends State<BookJobStep1> {
                 height: 10,
               ),
               Text(
-                "Step 1 of 3",
+                "Step 1 of 4",
                 style: TextStyle(
                     fontSize: 20,
                     color: ThemeColors.black,
