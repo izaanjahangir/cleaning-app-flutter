@@ -4,6 +4,7 @@ import 'package:cleaning_app/config/theme_colors.dart';
 import 'package:cleaning_app/screens/add_card/add_card.dart';
 import 'package:cleaning_app/screens/book_job_step_3/details.dart';
 import 'package:cleaning_app/screens/book_job_step_3/select_card_section.dart';
+import 'package:cleaning_app/screens/book_job_step_4/book_job_step_4.dart';
 import 'package:cleaning_app/utils/helpers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -147,7 +148,12 @@ class _BookJobStep3State extends State<BookJobStep3> {
                             Navigator.of(context).pop();
                           },
                           label: "Back"),
-                      Button(onPressed: () {}, label: "Next")
+                      Button(
+                          onPressed: () {
+                            Navigator.of(context)
+                                .pushNamed(BookJobStep4.screenName);
+                          },
+                          label: "Next")
                     ],
                   ),
                 )
