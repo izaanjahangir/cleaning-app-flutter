@@ -7,5 +7,5 @@ class ThemeColors {
   static Color placeholder = Colors.grey[600];
   static Color white = Colors.white;
   static Color lightGrey = Color.fromRGBO(230, 230, 230, 1);
-  static Color lightestGrey = Colors.grey[300];
+  static Color lightestGrey = Colors.grey[200];
 }

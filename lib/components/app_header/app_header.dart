@@ -16,8 +16,7 @@ class AppHeader extends StatelessWidget {
       width: double.infinity,
       height: height * 0.08,
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Stack(
         children: [
           if (showBackIcon)
             TouchableOpacity(
@@ -31,13 +30,14 @@ class AppHeader extends StatelessWidget {
                 color: ThemeColors.white,
               ),
             ),
-          Expanded(
+          Align(
+              alignment: Alignment.center,
               child: Container(
-            alignment: Alignment.center,
-            child: Image.asset(
-              "assets/icons/app-logo.png",
-            ),
-          ))
+                alignment: Alignment.center,
+                child: Image.asset(
+                  "assets/icons/app-logo.png",
+                ),
+              ))
         ],
       ),
     );
