@@ -20,7 +20,7 @@ class JobHistory extends StatelessWidget {
         time: DateTime(2021, 2, 14),
         instructions: "Another instruction",
         location: {"latitude": 24.8611791, "longitude": 66.9231016},
-        noOfBedrooms: 4)
+        noOfBedrooms: 4),
   ];
 
   @override
