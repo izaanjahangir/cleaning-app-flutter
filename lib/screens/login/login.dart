@@ -15,9 +15,9 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-      body: SafeArea(
-        child: Container(
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
           color: ThemeColors.yellow,
           padding: const EdgeInsets.symmetric(horizontal: 25),
           child: Column(
