@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:cleaning_app/components/app_drawer/app_drawer.dart';
 import 'package:cleaning_app/components/button/button.dart';
 import 'package:cleaning_app/config/theme_colors.dart';
 import 'package:cleaning_app/screens/book_job_step_4/book_job_step_4.dart';
@@ -92,7 +91,6 @@ class _BookJobStep3State extends State<BookJobStep3> {
 
     return SafeArea(
       child: Scaffold(
-        drawer: AppDrawer(),
         body: SafeArea(
           child: Column(
             children: [

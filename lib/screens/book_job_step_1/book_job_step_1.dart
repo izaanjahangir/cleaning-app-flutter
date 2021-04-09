@@ -1,4 +1,3 @@
-import 'package:cleaning_app/components/app_drawer/app_drawer.dart';
 import 'package:cleaning_app/components/button/button.dart';
 import 'package:cleaning_app/config/theme_colors.dart';
 import 'package:cleaning_app/screens/book_job_step_2/book_job_step_2.dart';
@@ -41,7 +40,6 @@ class _BookJobStep1State extends State<BookJobStep1> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        drawer: AppDrawer(),
         body: SafeArea(
           child: Column(
             children: [

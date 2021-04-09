@@ -2,7 +2,6 @@ import 'package:cleaning_app/screens/job_history_details/job_history_details.dar
 import 'package:flutter/material.dart';
 
 import "package:cleaning_app/components/app_header/app_header.dart";
-import "package:cleaning_app/components/app_drawer/app_drawer.dart";
 import "package:cleaning_app/components/text_heading/text_heading.dart";
 import "package:cleaning_app/screens/job_history/job_history_item.dart";
 import "package:cleaning_app/models/job.dart";
@@ -28,7 +27,6 @@ class JobHistory extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        drawer: AppDrawer(),
         body: SafeArea(
           child: Column(
             children: [

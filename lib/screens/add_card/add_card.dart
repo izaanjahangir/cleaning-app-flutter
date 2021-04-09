@@ -1,4 +1,3 @@
-import 'package:cleaning_app/components/app_drawer/app_drawer.dart';
 import 'package:cleaning_app/components/button/button.dart';
 import 'package:cleaning_app/components/text_input/text_input.dart';
 import 'package:cleaning_app/components/date_input/date_input.dart';
@@ -64,12 +63,10 @@ class _AddCardState extends State<AddCard> {
           Helpers.dismissKeyboardOnTap(context);
         },
         child: Scaffold(
-          drawer: AppDrawer(),
           body: Column(
             children: [
               AppHeader(
                 showBackIcon: true,
-                showDrawerIcon: false,
               ),
               Expanded(
                 child: SingleChildScrollView(

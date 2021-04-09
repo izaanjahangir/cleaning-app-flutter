@@ -4,9 +4,8 @@ import 'package:touchable_opacity/touchable_opacity.dart';
 
 class AppHeader extends StatelessWidget {
   final bool showBackIcon;
-  final bool showDrawerIcon;
 
-  AppHeader({this.showBackIcon = false, this.showDrawerIcon = true});
+  AppHeader({this.showBackIcon = false});
 
   @override
   Widget build(BuildContext context) {
@@ -20,18 +19,6 @@ class AppHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // if (showDrawerIcon)
-          //   TouchableOpacity(
-          //     onTap: () {
-          //       Scaffold.of(context).openDrawer();
-          //     },
-          //     activeOpacity: 0.1,
-          //     child: Icon(
-          //       Icons.menu,
-          //       size: height * 0.05,
-          //       color: ThemeColors.white,
-          //     ),
-          //   ),
           if (showBackIcon)
             TouchableOpacity(
               onTap: () {

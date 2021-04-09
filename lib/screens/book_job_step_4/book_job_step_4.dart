@@ -1,10 +1,8 @@
-import 'package:cleaning_app/components/app_drawer/app_drawer.dart';
 import 'package:cleaning_app/components/button/button.dart';
 import 'package:cleaning_app/config/theme_colors.dart';
 import 'package:cleaning_app/screens/add_card/add_card.dart';
 import 'package:cleaning_app/screens/book_job_step_4/details.dart';
 import 'package:cleaning_app/screens/book_job_step_4/select_card_section.dart';
-// import 'package:cleaning_app/screens/book_job_step_4/book_job_step_4.dart';
 import 'package:cleaning_app/utils/helpers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +62,6 @@ class _BookJobStep4State extends State<BookJobStep4> {
           Helpers.dismissKeyboardOnTap(context);
         },
         child: Scaffold(
-          drawer: AppDrawer(),
           body: SafeArea(
             child: Column(
               children: [

@@ -5,7 +5,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:cleaning_app/screens/book_job_step_4/details.dart';
 import "package:cleaning_app/components/app_header/app_header.dart";
-import "package:cleaning_app/components/app_drawer/app_drawer.dart";
 
 class JobHistoryDetails extends StatefulWidget {
   static String screenName = "job-history-details";
@@ -36,7 +35,6 @@ class _JobHistoryDetailsState extends State<JobHistoryDetails> {
 
     return SafeArea(
       child: Scaffold(
-        drawer: AppDrawer(),
         body: SafeArea(
           child: Column(
             children: [

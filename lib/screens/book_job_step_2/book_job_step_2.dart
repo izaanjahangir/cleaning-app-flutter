@@ -1,4 +1,3 @@
-import 'package:cleaning_app/components/app_drawer/app_drawer.dart';
 import 'package:cleaning_app/components/button/button.dart';
 import 'package:cleaning_app/config/theme_colors.dart';
 import 'package:cleaning_app/screens/book_job_step_3/book_job_step_3.dart';
@@ -25,7 +24,6 @@ class _BookJobStep2State extends State<BookJobStep2> {
           Helpers.dismissKeyboardOnTap(context);
         },
         child: Scaffold(
-          drawer: AppDrawer(),
           body: SafeArea(
             child: Column(
               children: [
