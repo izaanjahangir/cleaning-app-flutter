@@ -1,7 +1,7 @@
+import 'package:cleaning_app/screens/job_history/job_history.dart';
 import 'package:flutter/material.dart';
 
 import "package:cleaning_app/screens/book_job_step_1/book_job_step_1.dart";
-import "package:cleaning_app/screens/your_jobs/your_jobs.dart";
 import "package:cleaning_app/screens/settings/settings.dart";
 import "package:cleaning_app/components/app_header/app_header.dart";
 import "package:cleaning_app/components/app_drawer/app_drawer.dart";
@@ -44,9 +44,9 @@ class Home extends StatelessWidget {
                       ),
                       HomeOption(
                         onTab: () {
-                          Navigator.pushNamed(context, YourJobs.screenName);
+                          Navigator.pushNamed(context, JobHistory.screenName);
                         },
-                        label: "Your Jobs",
+                        label: "Jobs History",
                       ),
                     ],
                   ),
