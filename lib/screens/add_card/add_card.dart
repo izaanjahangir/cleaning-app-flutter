@@ -1,4 +1,5 @@
 import 'package:cleaning_app/components/app_drawer/app_drawer.dart';
+import 'package:cleaning_app/components/button/button.dart';
 import 'package:cleaning_app/components/text_input/text_input.dart';
 import 'package:cleaning_app/components/date_input/date_input.dart';
 import 'package:cleaning_app/utils/date_helpers.dart';
@@ -144,6 +145,13 @@ class _AddCardState extends State<AddCard> {
                                 controller: holderNameController,
                                 hintText: "Card Holder Name",
                               ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              SizedBox(
+                                  width: double.infinity,
+                                  child: Button(
+                                      onPressed: () {}, label: "Add Card"))
                             ],
                           ),
                         )

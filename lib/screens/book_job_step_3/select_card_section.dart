@@ -43,7 +43,7 @@ class SelectCardSection extends StatelessWidget {
                 Text(
                   Formatter.formatCreditCard(item["number"]),
                   style: TextStyle(fontSize: 16),
-                )
+                ),
               ],
             ),
           ),
