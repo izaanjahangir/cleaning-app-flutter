@@ -1,3 +1,4 @@
+import 'package:cleaning_app/components/background/background.dart';
 import 'package:flutter/material.dart';
 
 import "package:cleaning_app/screens/home/home.dart";
@@ -17,62 +18,66 @@ class Login extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          color: ThemeColors.yellow,
-          padding: const EdgeInsets.symmetric(horizontal: 25),
-          child: Column(
-            children: [
-              Expanded(
-                child: Form(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Image.asset(
-                        "assets/icons/app-logo.png",
-                        width: width * 0.25,
-                        height: width * 0.25,
+        body: Stack(
+          children: [
+            Background(),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Form(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Image.asset(
+                            "assets/icons/app-logo.png",
+                            width: width * 0.25,
+                            height: width * 0.25,
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Text(
+                            "We help you clean your home",
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: ThemeColors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          TextInput(
+                            controller: emailController,
+                            hintText: "Enter your email",
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          TextInput(
+                            controller: passwordController,
+                            hintText: "Enter your password",
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                              width: double.infinity,
+                              child: Button(
+                                label: "Login",
+                                onPressed: () {
+                                  Navigator.pushNamed(context, Home.screenName);
+                                },
+                              )),
+                        ],
                       ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Text(
-                        "We help you clean your home",
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: ThemeColors.black,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      TextInput(
-                        controller: emailController,
-                        hintText: "Enter your email",
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      TextInput(
-                        controller: passwordController,
-                        hintText: "Enter your password",
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                          width: double.infinity,
-                          child: Button(
-                            label: "Login",
-                            onPressed: () {
-                              Navigator.pushNamed(context, Home.screenName);
-                            },
-                          )),
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );
