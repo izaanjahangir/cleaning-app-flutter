@@ -1,4 +1,5 @@
 import 'package:cleaning_app/config/theme_colors.dart';
+import 'package:cleaning_app/screens/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:touchable_opacity/touchable_opacity.dart';
 
@@ -50,6 +51,10 @@ class AppHeader extends StatelessWidget {
                   onTap: () {
                     if (onLogoutPress != null) {
                       onLogoutPress();
+                    } else {
+                      Navigator.of(context).popUntil((route) {
+                        return route.settings.name == Login.screenName;
+                      });
                     }
                   },
                   child: Text(
