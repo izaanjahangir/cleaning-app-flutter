@@ -51,11 +51,11 @@ class AppHeader extends StatelessWidget {
                   onTap: () {
                     if (onLogoutPress != null) {
                       onLogoutPress();
-                    } else {
-                      Navigator.of(context).popUntil((route) {
-                        return route.settings.name == Login.screenName;
-                      });
+                      return;
                     }
+
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        Login.screenName, (Route<dynamic> route) => false);
                   },
                   child: Text(
                     "Logout",

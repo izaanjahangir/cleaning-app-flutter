@@ -78,7 +78,7 @@ class Login extends StatelessWidget {
                                   child: Button(
                                     label: "Login",
                                     onPressed: () {
-                                      Navigator.pushNamed(
+                                      Navigator.pushReplacementNamed(
                                           context, Home.screenName);
                                     },
                                   )),
