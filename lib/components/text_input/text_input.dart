@@ -5,21 +5,28 @@ class TextInput extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final Function validator;
-
+  final bool obscureText;
   final int maxLength;
+  final bool autocorrect;
+  final bool enableSuggestions;
 
-  TextInput({
-    this.controller,
-    this.hintText,
-    this.validator,
-    this.maxLength,
-  });
+  TextInput(
+      {this.controller,
+      this.hintText,
+      this.validator,
+      this.maxLength,
+      this.obscureText = false,
+      this.autocorrect = true,
+      this.enableSuggestions = true});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 3),
       child: TextFormField(
+        enableSuggestions: enableSuggestions,
+        autocorrect: autocorrect,
+        obscureText: obscureText,
         buildCounter: (BuildContext context,
                 {int currentLength, int maxLength, bool isFocused}) =>
             null,
