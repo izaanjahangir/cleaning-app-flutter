@@ -16,18 +16,51 @@ class Register extends StatelessWidget {
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   final FirebaseAuth auth = FirebaseAuth.instance;
 
-  void handleRegister() async {
+  void handleRegister(BuildContext context) async {
     try {
-      UserCredential userCredential =
-          await FirebaseHelpers.createUserWithEmailAndPassword(
-              "izaanjahangir2@gmail.com", "12345678");
+      final String errorMessage = validate();
 
-      print("done");
+      if (errorMessage != null) {
+        throw {"message": errorMessage};
+      }
+
+      EasyLoading.show(status: 'loading');
+
+      await FirebaseHelpers.createUserWithEmailAndPassword(
+          "izaanjahangir2@gmail.com", "12345678");
+
+      EasyLoading.showSuccess('Account Registered');
+      Navigator.of(context).pop();
     } catch (e) {
       EasyLoading.showError(e["message"]);
     }
+  }
+
+  String validate() {
+    String errorMessage;
+    String fullName = fullNameController.text.trim();
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
+    String confirmPassword = confirmPasswordController.text.trim();
+
+    if (fullName == "" ||
+        email == "" ||
+        password == "" ||
+        confirmPassword == "") {
+      errorMessage = "All fields are required";
+      return errorMessage;
+    }
+
+    if (password != confirmPassword) {
+      errorMessage = "Passwords doesn't match";
+      return errorMessage;
+    }
+
+    return errorMessage;
   }
 
   @override
@@ -106,7 +139,7 @@ class Register extends StatelessWidget {
                                           obscureText: true,
                                           enableSuggestions: false,
                                           autocorrect: false,
-                                          controller: passwordController,
+                                          controller: confirmPasswordController,
                                           hintText: "Confirm password",
                                         ),
                                         SizedBox(
@@ -117,7 +150,7 @@ class Register extends StatelessWidget {
                                             child: Button(
                                               label: "Register",
                                               onPressed: () {
-                                                handleRegister();
+                                                handleRegister(context);
                                                 // Navigator.pop(context);
                                               },
                                             )),
