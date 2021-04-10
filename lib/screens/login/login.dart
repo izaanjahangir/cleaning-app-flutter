@@ -1,5 +1,6 @@
 import 'package:cleaning_app/components/background/background.dart';
 import 'package:cleaning_app/screens/register/register.dart';
+import 'package:cleaning_app/utils/firebase.dart';
 import 'package:cleaning_app/utils/helpers.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +8,7 @@ import "package:cleaning_app/screens/home/home.dart";
 import "package:cleaning_app/config/theme_colors.dart";
 import "package:cleaning_app/components/text_input/text_input.dart";
 import "package:cleaning_app/components/button/button.dart";
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:touchable_opacity/touchable_opacity.dart';
 
 class Login extends StatelessWidget {
@@ -14,6 +16,42 @@ class Login extends StatelessWidget {
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  void handleLogin(BuildContext context) async {
+    try {
+      final String errorMessage = validate();
+
+      if (errorMessage != null) {
+        throw {"message": errorMessage};
+      }
+
+      EasyLoading.show(status: 'loading');
+
+      String email = emailController.text.trim();
+      String password = passwordController.text.trim();
+
+      await FirebaseHelpers.signInWithEmailAndPassword(email, password);
+      Navigator.pushReplacementNamed(context, Home.screenName);
+    } catch (e) {
+      print(e);
+      EasyLoading.showError(e["message"]);
+    }
+
+    EasyLoading.dismiss();
+  }
+
+  String validate() {
+    String errorMessage;
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
+
+    if (email == "" || password == "") {
+      errorMessage = "All fields are required";
+      return errorMessage;
+    }
+
+    return errorMessage;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,8 +129,7 @@ class Login extends StatelessWidget {
                                         child: Button(
                                           label: "Login",
                                           onPressed: () {
-                                            Navigator.pushReplacementNamed(
-                                                context, Home.screenName);
+                                            handleLogin(context);
                                           },
                                         )),
                                   ],
