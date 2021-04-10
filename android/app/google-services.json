@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "977078678492",
+    "project_id": "izaan-cleaning-app",
+    "storage_bucket": "izaan-cleaning-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:977078678492:android:e734f04cf0fd58e0d31519",
+        "android_client_info": {
+          "package_name": "com.example.cleaning_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "977078678492-rr6lhld6eqoufq0a870j9rq14jk2satv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgNvVypm0GZKIZJr-cQrkydmiKLqM0R4k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "977078678492-rr6lhld6eqoufq0a870j9rq14jk2satv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
