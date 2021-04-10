@@ -4,8 +4,13 @@ import 'package:touchable_opacity/touchable_opacity.dart';
 
 class AppHeader extends StatelessWidget {
   final bool showBackIcon;
+  final bool showLogoutIcon;
+  final Function onLogoutPress;
 
-  AppHeader({this.showBackIcon = false});
+  AppHeader(
+      {this.showBackIcon = false,
+      this.showLogoutIcon = true,
+      this.onLogoutPress});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +42,21 @@ class AppHeader extends StatelessWidget {
                 child: Image.asset(
                   "assets/icons/app-logo.png",
                 ),
-              ))
+              )),
+          if (showLogoutIcon)
+            Align(
+              alignment: Alignment.centerRight,
+              child: TouchableOpacity(
+                  onTap: () {
+                    if (onLogoutPress != null) {
+                      onLogoutPress();
+                    }
+                  },
+                  child: Text(
+                    "Logout",
+                    style: TextStyle(fontSize: 18, color: ThemeColors.white),
+                  )),
+            )
         ],
       ),
     );

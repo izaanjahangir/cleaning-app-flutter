@@ -22,7 +22,7 @@ class Login extends StatelessWidget {
           children: [
             Background(),
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
               child: Center(
                 child: PhysicalModel(
                   borderRadius: BorderRadius.circular(20),

@@ -16,7 +16,9 @@ class Home extends StatelessWidget {
       child: Scaffold(
         body: Column(
           children: [
-            AppHeader(),
+            AppHeader(
+              showLogoutIcon: true,
+            ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: Column(
