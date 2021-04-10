@@ -1,11 +1,13 @@
 import 'package:cleaning_app/components/background/background.dart';
+import 'package:cleaning_app/utils/firebase.dart';
 import 'package:cleaning_app/utils/helpers.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-import "package:cleaning_app/screens/home/home.dart";
 import "package:cleaning_app/config/theme_colors.dart";
 import "package:cleaning_app/components/text_input/text_input.dart";
 import "package:cleaning_app/components/button/button.dart";
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:touchable_opacity/touchable_opacity.dart';
 
 class Register extends StatelessWidget {
@@ -14,6 +16,19 @@ class Register extends StatelessWidget {
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final FirebaseAuth auth = FirebaseAuth.instance;
+
+  void handleRegister() async {
+    try {
+      UserCredential userCredential =
+          await FirebaseHelpers.createUserWithEmailAndPassword(
+              "izaanjahangir2@gmail.com", "12345678");
+
+      print("done");
+    } catch (e) {
+      EasyLoading.showError(e["message"]);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +117,8 @@ class Register extends StatelessWidget {
                                             child: Button(
                                               label: "Register",
                                               onPressed: () {
-                                                Navigator.pop(context);
+                                                handleRegister();
+                                                // Navigator.pop(context);
                                               },
                                             )),
                                       ],
