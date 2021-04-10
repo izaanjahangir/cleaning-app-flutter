@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseHelpers {
@@ -19,6 +20,28 @@ class FirebaseHelpers {
       throw {"message": e.message};
     } catch (e) {
       throw {"message": e.message};
+    }
+  }
+
+  static addDocument(String collection, Map data) async {
+    CollectionReference collectionReference =
+        FirebaseFirestore.instance.collection(collection);
+
+    return collectionReference.add(data);
+  }
+
+  static setDocument(
+      String collection, String doc, Map<String, dynamic> data) async {
+    CollectionReference collectionReference =
+        FirebaseFirestore.instance.collection(collection);
+
+    try {
+      await collectionReference.doc(doc).set(data);
+
+      return null;
+    } catch (e) {
+      print(e);
+      throw e;
     }
   }
 }

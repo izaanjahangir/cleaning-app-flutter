@@ -30,8 +30,17 @@ class Register extends StatelessWidget {
 
       EasyLoading.show(status: 'loading');
 
-      await FirebaseHelpers.createUserWithEmailAndPassword(
-          "izaanjahangir2@gmail.com", "12345678");
+      String email = emailController.text.trim();
+      String password = passwordController.text.trim();
+      String fullName = fullNameController.text.trim();
+
+      UserCredential user =
+          await FirebaseHelpers.createUserWithEmailAndPassword(email, password);
+
+      Map<String, dynamic> userData = {"email": email, "fullName": fullName};
+      String userId = user.user.uid;
+
+      await FirebaseHelpers.setDocument("users", userId, userData);
 
       EasyLoading.showSuccess('Account Registered');
       Navigator.of(context).pop();
