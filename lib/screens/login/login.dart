@@ -22,59 +22,73 @@ class Login extends StatelessWidget {
           children: [
             Background(),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 25),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Form(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Image.asset(
-                            "assets/icons/app-logo.png",
-                            width: width * 0.25,
-                            height: width * 0.25,
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              child: Center(
+                child: PhysicalModel(
+                  borderRadius: BorderRadius.circular(20),
+                  color: ThemeColors.black,
+                  elevation: 3,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 20),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: ThemeColors.white),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Form(
+                          child: Column(
+                            // mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Image.asset(
+                                "assets/icons/app-logo.png",
+                                width: width * 0.2,
+                                height: width * 0.2,
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                "We help you clean your home",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    color: ThemeColors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              TextInput(
+                                controller: emailController,
+                                hintText: "Enter your email",
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              TextInput(
+                                controller: passwordController,
+                                hintText: "Enter your password",
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                  width: double.infinity,
+                                  child: Button(
+                                    label: "Login",
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                          context, Home.screenName);
+                                    },
+                                  )),
+                            ],
                           ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Text(
-                            "We help you clean your home",
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: ThemeColors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          TextInput(
-                            controller: emailController,
-                            hintText: "Enter your email",
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          TextInput(
-                            controller: passwordController,
-                            hintText: "Enter your password",
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                              width: double.infinity,
-                              child: Button(
-                                label: "Login",
-                                onPressed: () {
-                                  Navigator.pushNamed(context, Home.screenName);
-                                },
-                              )),
-                        ],
-                      ),
+                        )
+                      ],
                     ),
-                  )
-                ],
+                  ),
+                ),
               ),
             )
           ],

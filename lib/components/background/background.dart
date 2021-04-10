@@ -7,17 +7,18 @@ class Background extends StatelessWidget {
     return SizedBox(
       height: double.infinity,
       width: double.infinity,
-      child: Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage("assets/images/room.jpeg"))),
-        child: Opacity(
-          opacity: 0.7,
-          child: Container(
-            color: ThemeColors.yellow,
+      child: Column(
+        children: [
+          Image(
+            fit: BoxFit.cover,
+            image: AssetImage("assets/images/room.jpeg"),
           ),
-        ),
+          Expanded(
+            child: Container(
+              color: ThemeColors.white,
+            ),
+          )
+        ],
       ),
     );
   }
