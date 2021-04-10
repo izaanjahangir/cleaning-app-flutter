@@ -9,9 +9,19 @@ class Background extends StatelessWidget {
       width: double.infinity,
       child: Column(
         children: [
-          Image(
-            fit: BoxFit.cover,
-            image: AssetImage("assets/images/room.jpeg"),
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage("assets/images/room.jpeg"))),
+              child: Opacity(
+                opacity: 0.4,
+                child: Container(
+                  color: ThemeColors.black,
+                ),
+              ),
+            ),
           ),
           Expanded(
             child: Container(
