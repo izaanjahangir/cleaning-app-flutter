@@ -1,7 +1,6 @@
 import 'package:cleaning_app/models/job.dart';
 import "package:flutter/material.dart";
 import 'package:cleaning_app/config/theme_colors.dart';
-import 'package:touchable_opacity/touchable_opacity.dart';
 
 class JobHistoryItem extends StatelessWidget {
   final Job item;
