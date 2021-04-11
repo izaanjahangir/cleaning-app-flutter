@@ -41,12 +41,11 @@ class Login extends StatelessWidget {
           uid: user.uid, email: user.email, fullName: user.fullName);
 
       Navigator.pushReplacementNamed(context, Home.screenName);
+      EasyLoading.dismiss();
     } catch (e) {
       print(e);
       EasyLoading.showError(e["message"]);
     }
-
-    EasyLoading.dismiss();
   }
 
   String validate() {
