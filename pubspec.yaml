@@ -41,6 +41,7 @@ dependencies:
   cloud_firestore: ^1.0.4
   provider: ^5.0.0
   shared_preferences: ^2.0.5
+  stripe_payment: ^1.0.11
 
 dev_dependencies:
   flutter_test:
