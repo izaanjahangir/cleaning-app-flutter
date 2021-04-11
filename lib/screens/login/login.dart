@@ -1,4 +1,6 @@
 import 'package:cleaning_app/components/background/background.dart';
+import 'package:cleaning_app/models/user.dart';
+import 'package:cleaning_app/providers/user_provider.dart';
 import 'package:cleaning_app/screens/register/register.dart';
 import 'package:cleaning_app/utils/firebase.dart';
 import 'package:cleaning_app/utils/helpers.dart';
@@ -9,6 +11,7 @@ import "package:cleaning_app/config/theme_colors.dart";
 import "package:cleaning_app/components/text_input/text_input.dart";
 import "package:cleaning_app/components/button/button.dart";
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:provider/provider.dart';
 import 'package:touchable_opacity/touchable_opacity.dart';
 
 class Login extends StatelessWidget {
@@ -30,7 +33,13 @@ class Login extends StatelessWidget {
       String email = emailController.text.trim();
       String password = passwordController.text.trim();
 
-      await FirebaseHelpers.signInWithEmailAndPassword(email, password);
+      User user =
+          await FirebaseHelpers.signInWithEmailAndPassword(email, password);
+      UserProvider userProvider =
+          Provider.of<UserProvider>(context, listen: false);
+      userProvider.update(
+          uid: user.uid, email: user.email, fullName: user.fullName);
+
       Navigator.pushReplacementNamed(context, Home.screenName);
     } catch (e) {
       print(e);

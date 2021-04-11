@@ -1,6 +1,8 @@
 import 'package:cleaning_app/config/theme_colors.dart';
+import 'package:cleaning_app/providers/user_provider.dart';
 import 'package:cleaning_app/screens/login/login.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:touchable_opacity/touchable_opacity.dart';
 
 class AppHeader extends StatelessWidget {
@@ -53,6 +55,10 @@ class AppHeader extends StatelessWidget {
                       onLogoutPress();
                       return;
                     }
+
+                    UserProvider userProvider =
+                        Provider.of<UserProvider>(context);
+                    userProvider.clear();
 
                     Navigator.of(context).pushNamedAndRemoveUntil(
                         Login.screenName, (Route<dynamic> route) => false);
