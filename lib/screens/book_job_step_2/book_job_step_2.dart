@@ -16,7 +16,7 @@ class BookJobStep2 extends StatefulWidget {
 }
 
 class _BookJobStep2State extends State<BookJobStep2> {
-  DateTime jobTime;
+  DateTime jobTime = DateTime.now();
   TextEditingController instructionController = TextEditingController();
 
   @override
@@ -68,6 +68,8 @@ class _BookJobStep2State extends State<BookJobStep2> {
                                       color: ThemeColors.white,
                                       height: 150,
                                       child: CupertinoDatePicker(
+                                          initialDateTime: DateTime.now(),
+                                          minimumDate: DateTime.now(),
                                           mode: CupertinoDatePickerMode
                                               .dateAndTime,
                                           onDateTimeChanged:
