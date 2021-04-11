@@ -1,10 +1,12 @@
 import 'package:cleaning_app/components/button/button.dart';
 import 'package:cleaning_app/components/text_input/text_input.dart';
 import 'package:cleaning_app/components/date_input/date_input.dart';
+import 'package:cleaning_app/config/keys.dart';
 import 'package:cleaning_app/utils/date_helpers.dart';
 import 'package:cleaning_app/utils/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:stripe_payment/stripe_payment.dart' as Stripe;
 
 import "package:cleaning_app/components/app_header/app_header.dart";
 import "package:cleaning_app/models/credit_card.dart";
@@ -53,6 +55,29 @@ class _AddCardState extends State<AddCard> {
     cvvController.dispose();
 
     super.dispose();
+  }
+
+  addCard() async {
+    try {
+      DateTime expiryDate = DateHelpers.toDateTime(card.expiryDate);
+
+      Stripe.StripePayment.setOptions(Stripe.StripeOptions(
+        publishableKey: Keys.stripePublishableKey,
+      ));
+
+      Stripe.CreditCard cc = Stripe.CreditCard(
+          number: card.number,
+          name: card.holderName,
+          cvc: card.cvv,
+          expMonth: expiryDate.month,
+          expYear: expiryDate.year);
+
+      Stripe.Token token = await Stripe.StripePayment.createTokenWithCard(cc);
+      print(token.tokenId);
+      print(token.card.brand);
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -148,7 +173,10 @@ class _AddCardState extends State<AddCard> {
                               SizedBox(
                                   width: double.infinity,
                                   child: Button(
-                                      onPressed: () {}, label: "Add Card"))
+                                      onPressed: () {
+                                        addCard();
+                                      },
+                                      label: "Add Card"))
                             ],
                           ),
                         )
