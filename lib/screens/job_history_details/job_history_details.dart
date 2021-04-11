@@ -71,7 +71,9 @@ class _JobHistoryDetailsState extends State<JobHistoryDetails> {
                                     const EdgeInsets.symmetric(horizontal: 20),
                                 child: Column(
                                   children: [
-                                    Details(),
+                                    Details(
+                                      data: job,
+                                    ),
                                   ],
                                 ),
                               ),

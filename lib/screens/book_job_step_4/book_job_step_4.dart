@@ -1,5 +1,6 @@
 import 'package:cleaning_app/components/button/button.dart';
 import 'package:cleaning_app/config/theme_colors.dart';
+import 'package:cleaning_app/models/job.dart';
 import 'package:cleaning_app/screens/add_card/add_card.dart';
 import 'package:cleaning_app/screens/book_job_step_4/details.dart';
 import 'package:cleaning_app/screens/book_job_step_4/select_card_section.dart';
@@ -56,6 +57,15 @@ class _BookJobStep4State extends State<BookJobStep4> {
 
   @override
   Widget build(BuildContext context) {
+    final Map<String, dynamic> arguments =
+        ModalRoute.of(context).settings.arguments;
+    final Job job = Job(
+        noOfBedrooms: arguments["amount"],
+        extras: arguments["selectedExtras"],
+        time: arguments["jobTime"]);
+
+    print(arguments["extras"]);
+
     return SafeArea(
       child: GestureDetector(
         onTap: () {
@@ -94,7 +104,7 @@ class _BookJobStep4State extends State<BookJobStep4> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                Details(),
+                                Details(data: job),
                                 SizedBox(
                                   height: 15,
                                 ),

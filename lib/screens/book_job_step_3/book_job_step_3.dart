@@ -88,6 +88,7 @@ class _BookJobStep3State extends State<BookJobStep3> {
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
+    Map<String, dynamic> arguments = ModalRoute.of(context).settings.arguments;
 
     return SafeArea(
       child: Scaffold(
@@ -194,8 +195,16 @@ class _BookJobStep3State extends State<BookJobStep3> {
                         label: "Back"),
                     Button(
                         onPressed: () {
-                          Navigator.of(context)
-                              .pushNamed(BookJobStep4.screenName);
+                          final Marker marker = markers.elementAt(0);
+
+                          final Map location = {
+                            "latitude": marker.position.latitude,
+                            "longitude": marker.position.longitude,
+                          };
+
+                          Navigator.of(context).pushNamed(
+                              BookJobStep4.screenName,
+                              arguments: {...arguments, "location": location});
                         },
                         label: "Next")
                   ],

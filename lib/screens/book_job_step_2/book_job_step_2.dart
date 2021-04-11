@@ -16,8 +16,13 @@ class BookJobStep2 extends StatefulWidget {
 }
 
 class _BookJobStep2State extends State<BookJobStep2> {
+  DateTime jobTime;
+  TextEditingController instructionController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    Map<String, dynamic> arguments = ModalRoute.of(context).settings.arguments;
+
     return SafeArea(
       child: GestureDetector(
         onTap: () {
@@ -66,7 +71,11 @@ class _BookJobStep2State extends State<BookJobStep2> {
                                           mode: CupertinoDatePickerMode
                                               .dateAndTime,
                                           onDateTimeChanged:
-                                              (DateTime newDate) {}),
+                                              (DateTime newDate) {
+                                            setState(() {
+                                              jobTime = newDate;
+                                            });
+                                          }),
                                     ),
                                   ),
                                 ),
@@ -83,7 +92,11 @@ class _BookJobStep2State extends State<BookJobStep2> {
                                     margin: const EdgeInsets.only(top: 10),
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 20),
-                                    child: TextArea())
+                                    child: TextArea(
+                                      controller: instructionController,
+                                      hintText:
+                                          "Write detailed instructions, if any",
+                                    ))
                               ],
                             ),
                           ),
@@ -106,7 +119,11 @@ class _BookJobStep2State extends State<BookJobStep2> {
                       Button(
                           onPressed: () {
                             Navigator.of(context)
-                                .pushNamed(BookJobStep3.screenName);
+                                .pushNamed(BookJobStep3.screenName, arguments: {
+                              ...arguments,
+                              "jobTime": jobTime,
+                              "instructions": instructionController.text
+                            });
                           },
                           label: "Next")
                     ],

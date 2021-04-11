@@ -1,4 +1,5 @@
 import 'package:cleaning_app/components/button/button.dart';
+import 'package:cleaning_app/config/constants.dart';
 import 'package:cleaning_app/config/theme_colors.dart';
 import 'package:cleaning_app/screens/book_job_step_2/book_job_step_2.dart';
 import 'package:flutter/material.dart';
@@ -17,11 +18,7 @@ class BookJobStep1 extends StatefulWidget {
 
 class _BookJobStep1State extends State<BookJobStep1> {
   int amount = 0;
-  final List<Map> extras = [
-    {"id": 0, "name": "Living Room"},
-    {"id": 1, "name": "Kitchen"},
-    {"id": 2, "name": "Bathroom"}
-  ];
+
   final List<int> selectedExtras = [];
 
   void handleExtraSelect(Map selectedItem) {
@@ -97,7 +94,7 @@ class _BookJobStep1State extends State<BookJobStep1> {
                       Container(
                           margin: const EdgeInsets.symmetric(vertical: 15),
                           child: Extras(
-                            values: extras,
+                            values: Constants.extras,
                             selected: selectedExtras,
                             onSelect: handleExtraSelect,
                           ))
@@ -119,7 +116,10 @@ class _BookJobStep1State extends State<BookJobStep1> {
                     Button(
                         onPressed: () {
                           Navigator.of(context)
-                              .pushNamed(BookJobStep2.screenName);
+                              .pushNamed(BookJobStep2.screenName, arguments: {
+                            "amount": amount,
+                            "selectedExtras": selectedExtras
+                          });
                         },
                         label: "Next")
                   ],

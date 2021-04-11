@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:cleaning_app/config/theme_colors.dart';
 
 class TextArea extends StatelessWidget {
+  final TextEditingController controller;
+  final String hintText;
+
+  TextArea({this.controller, this.hintText});
+
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -11,9 +16,10 @@ class TextArea extends StatelessWidget {
         color: ThemeColors.lightGrey,
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: TextField(
+          controller: controller,
           maxLines: null,
           decoration: InputDecoration(
-            hintText: "Write detailed instructions, if any",
+            hintText: hintText,
             hintStyle: TextStyle(),
             isDense: true,
             border: InputBorder.none,
