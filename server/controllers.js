@@ -1,4 +1,5 @@
 const firebase = require("./firebase");
+const helpers = require("./helpers");
 const keys = require("./keys");
 const controllers = {};
 
@@ -54,6 +55,47 @@ controllers.addCard = async function (req, res) {
 
     res.json({
       data: {},
+      success: true,
+      message: "Customer created",
+    });
+  } catch (e) {
+    res.status(400).json({ success: false, message: e.message });
+  }
+};
+
+controllers.handlePay = async function (req, res) {
+  try {
+    const payload = {
+      card: req.body.card,
+      amount: req.body.amount,
+    };
+
+    const card = await firebase.getDocument("cards", payload.card);
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: helpers.dollarToCents(payload.amount),
+      currency: "usd",
+      payment_method_types: ["card"],
+      payment_method: card.data.cardToken,
+      customer: card.data.stripeUser,
+    });
+
+    const payment = await stripe.paymentIntents.confirm(paymentIntent.id);
+
+    const transaction = {
+      user: card.data.user,
+      stripeUser: card.data.stripeUser,
+      transaction: payment.id,
+      amount: payment.amount,
+      currency: payment.currency,
+      paymentMethod: payment.payment_method,
+      card: card.uid,
+      status: payment.status,
+    };
+
+    await firebase.updateDocument("transactions", payment.id, transaction);
+
+    res.json({
+      data: { transaction },
       success: true,
       message: "Customer created",
     });
