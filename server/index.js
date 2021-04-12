@@ -7,6 +7,10 @@ const controllers = require("./controllers");
 // Middlewares
 app.use(express.json());
 
+app.get("/ping", (req, res) => {
+  res.json({ success: true, data: {}, message: "pong!" });
+});
+
 app.post("/api/create-customer", controllers.createCustomer);
 app.post("/api/add-card", controllers.addCard);
 app.post("/api/pay", controllers.handlePay);
