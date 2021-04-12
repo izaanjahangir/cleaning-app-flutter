@@ -32,6 +32,7 @@ controllers.createCustomer = async function (req, res) {
       message: "Customer created",
     });
   } catch (e) {
+    console.log("e =>", e);
     res.status(400).json({ success: false, message: e.message });
   }
 };
@@ -75,6 +76,8 @@ controllers.addCard = async function (req, res) {
       message: "Customer created",
     });
   } catch (e) {
+    console.log("e =>", e);
+
     res.status(400).json({ success: false, message: e.message });
   }
 };
@@ -124,6 +127,8 @@ controllers.handlePay = async function (req, res) {
       message: "Customer created",
     });
   } catch (e) {
+    console.log("e =>", e);
+
     res.status(400).json({ success: false, message: e.message });
   }
 };

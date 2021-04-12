@@ -1,4 +1,5 @@
 import 'package:cleaning_app/components/background/background.dart';
+import 'package:cleaning_app/utils/api.dart';
 import 'package:cleaning_app/utils/firebase.dart';
 import 'package:cleaning_app/utils/helpers.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +42,7 @@ class Register extends StatelessWidget {
       String userId = user.user.uid;
 
       await FirebaseHelpers.setDocument("users", userId, userData);
+      await Api.createStripeUser(email, fullName);
 
       EasyLoading.showSuccess('Account Registered');
       Navigator.of(context).pop();
