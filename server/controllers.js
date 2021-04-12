@@ -7,6 +7,14 @@ const stripe = require("stripe")(keys.STRIPE_SECRET_KEY);
 
 controllers.createCustomer = async function (req, res) {
   try {
+    if (!req.body.email) {
+      throw new Error("Email is required");
+    }
+
+    if (!req.body.name) {
+      throw new Error("Name is required");
+    }
+
     const payload = {
       email: req.body.email,
       name: req.body.name,
@@ -30,6 +38,14 @@ controllers.createCustomer = async function (req, res) {
 
 controllers.addCard = async function (req, res) {
   try {
+    if (!req.body.email) {
+      throw new Error("Email is required");
+    }
+
+    if (!req.body.token) {
+      throw new Error("Token is required");
+    }
+
     const payload = {
       email: req.body.email,
       token: req.body.token,
@@ -65,6 +81,14 @@ controllers.addCard = async function (req, res) {
 
 controllers.handlePay = async function (req, res) {
   try {
+    if (!req.body.card) {
+      throw new Error("Card is required");
+    }
+
+    if (!req.body.amount) {
+      throw new Error("Amount is required");
+    }
+
     const payload = {
       card: req.body.card,
       amount: req.body.amount,
