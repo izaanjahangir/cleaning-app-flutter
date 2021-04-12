@@ -27,4 +27,39 @@ controllers.createCustomer = async function (req, res) {
   }
 };
 
+controllers.addCard = async function (req, res) {
+  try {
+    const payload = {
+      email: req.body.email,
+      token: req.body.token,
+    };
+
+    const firebaseUser = await firebase.findUserByEmail(payload.email);
+
+    const paymentMethod = await stripe.paymentMethods.attach(payload.token, {
+      customer: firebaseUser.data.stripeId,
+    });
+
+    const card = {
+      user: firebaseUser.uid,
+      stripeUser: firebaseUser.data.stripeId,
+      cardToken: paymentMethod.id,
+      brand: paymentMethod.card.brand,
+      expiryMonth: paymentMethod.card.exp_month,
+      expiryYear: paymentMethod.card.exp_year,
+      last4: paymentMethod.card.last4,
+    };
+
+    await firebase.addDocument("cards", card);
+
+    res.json({
+      data: {},
+      success: true,
+      message: "Customer created",
+    });
+  } catch (e) {
+    res.status(400).json({ success: false, message: e.message });
+  }
+};
+
 module.exports = controllers;

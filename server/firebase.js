@@ -15,6 +15,10 @@ firebase.updateDocument = async function (collection, doc, payload) {
     .set(payload, { merge: true });
 };
 
+firebase.addDocument = async function (collection, payload) {
+  return admin.firestore().collection(collection).add(payload);
+};
+
 firebase.getDocument = async function (collection, doc) {
   try {
     const snapshot = await admin
