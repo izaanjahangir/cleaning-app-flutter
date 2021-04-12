@@ -1,3 +1,4 @@
+const firebase = require("./firebase");
 const keys = require("./keys");
 const controllers = {};
 
@@ -10,10 +11,14 @@ controllers.createCustomer = async function (req, res) {
       name: req.body.name,
     };
 
+    const firebaseUser = await firebase.findUserByEmail(payload.email);
     const customer = await stripe.customers.create(payload);
+    await firebase.updateDocument("users", firebaseUser.uid, {
+      stripeId: customer.id,
+    });
 
     res.json({
-      data: { customer: {id: customer.id} },
+      data: {},
       success: true,
       message: "Customer created",
     });
