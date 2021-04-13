@@ -85,7 +85,6 @@ class _BookJobStep4State extends State<BookJobStep4> {
       });
 
       setState(() {
-        print("setting state");
         cards = newCards;
       });
     });
@@ -106,8 +105,6 @@ class _BookJobStep4State extends State<BookJobStep4> {
         noOfBedrooms: arguments["amount"],
         extras: arguments["selectedExtras"],
         time: arguments["jobTime"]);
-
-    print(arguments["extras"]);
 
     return SafeArea(
       child: GestureDetector(
@@ -203,7 +200,7 @@ class _BookJobStep4State extends State<BookJobStep4> {
                             // Navigator.of(context)
                             //     .pushNamed(BookJobStep4.screenName);
                           },
-                          label: "Next")
+                          label: "Confirm")
                     ],
                   ),
                 )

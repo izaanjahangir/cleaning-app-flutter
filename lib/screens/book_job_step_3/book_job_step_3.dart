@@ -4,6 +4,7 @@ import 'package:cleaning_app/config/theme_colors.dart';
 import 'package:cleaning_app/screens/book_job_step_4/book_job_step_4.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import "package:cleaning_app/utils/location.dart";
 
@@ -76,7 +77,7 @@ class _BookJobStep3State extends State<BookJobStep3> {
         controller.showMarkerInfoWindow(MarkerId("current-location-marker"));
       }
     } catch (e) {
-      print("some error " + e.toString());
+      EasyLoading.showError(e["message"]);
     }
   }
 
@@ -158,7 +159,7 @@ class _BookJobStep3State extends State<BookJobStep3> {
                                   onMapCreated:
                                       (GoogleMapController controller) {
                                     _controller.complete(controller);
-                                    print(markers.toString());
+                                  
                                   },
                                 ),
                               ),

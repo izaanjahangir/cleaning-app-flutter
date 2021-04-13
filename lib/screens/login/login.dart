@@ -43,7 +43,6 @@ class Login extends StatelessWidget {
       Navigator.pushReplacementNamed(context, Home.screenName);
       EasyLoading.dismiss();
     } catch (e) {
-      print(e);
       EasyLoading.showError(e["message"]);
     }
   }

@@ -82,7 +82,6 @@ class FirebaseHelpers {
 
       return null;
     } catch (e) {
-      print(e);
       throw e;
     }
   }

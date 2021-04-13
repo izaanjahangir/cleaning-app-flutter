@@ -93,7 +93,6 @@ class _AddCardState extends State<AddCard> {
       EasyLoading.showSuccess("Card added");
       Navigator.of(context).pop();
     } catch (e) {
-      print(e["message"]);
       EasyLoading.showError(e["message"]);
     }
   }
