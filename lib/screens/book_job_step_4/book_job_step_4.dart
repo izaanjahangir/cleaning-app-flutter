@@ -103,8 +103,21 @@ class _BookJobStep4State extends State<BookJobStep4> {
         ModalRoute.of(context).settings.arguments;
     final Job job = Job(
         noOfBedrooms: arguments["amount"],
+        instructions: arguments["instructions"],
         extras: arguments["selectedExtras"],
+        location: {
+          "latitude": arguments["location"]["latitude"],
+          "longitude": arguments["location"]["longitude"],
+        },
         time: arguments["jobTime"]);
+
+    void handleConfirm() {
+      print(job.location);
+      print(job.instructions);
+      print(job.extras);
+      print(job.noOfBedrooms);
+      print(job.time);
+    }
 
     return SafeArea(
       child: GestureDetector(
@@ -197,8 +210,7 @@ class _BookJobStep4State extends State<BookJobStep4> {
                           label: "Back"),
                       Button(
                           onPressed: () {
-                            // Navigator.of(context)
-                            //     .pushNamed(BookJobStep4.screenName);
+                            handleConfirm();
                           },
                           label: "Confirm")
                     ],
