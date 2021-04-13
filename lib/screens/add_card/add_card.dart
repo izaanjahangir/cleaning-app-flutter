@@ -2,10 +2,14 @@ import 'package:cleaning_app/components/button/button.dart';
 import 'package:cleaning_app/components/text_input/text_input.dart';
 import 'package:cleaning_app/components/date_input/date_input.dart';
 import 'package:cleaning_app/config/keys.dart';
+import 'package:cleaning_app/providers/user_provider.dart';
+import 'package:cleaning_app/utils/api.dart';
 import 'package:cleaning_app/utils/date_helpers.dart';
 import 'package:cleaning_app/utils/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:provider/provider.dart';
 import 'package:stripe_payment/stripe_payment.dart' as Stripe;
 
 import "package:cleaning_app/components/app_header/app_header.dart";
@@ -59,7 +63,16 @@ class _AddCardState extends State<AddCard> {
 
   addCard() async {
     try {
+      final String errorMessage = validate();
+
+      if (errorMessage != null) {
+        throw {"message": errorMessage};
+      }
+
+      EasyLoading.show(status: 'loading');
       DateTime expiryDate = DateHelpers.toDateTime(card.expiryDate);
+      UserProvider userProvider =
+          Provider.of<UserProvider>(context, listen: false);
 
       Stripe.StripePayment.setOptions(Stripe.StripeOptions(
         publishableKey: Keys.stripePublishableKey,
@@ -72,12 +85,34 @@ class _AddCardState extends State<AddCard> {
           expMonth: expiryDate.month,
           expYear: expiryDate.year);
 
-      Stripe.Token token = await Stripe.StripePayment.createTokenWithCard(cc);
-      print(token.tokenId);
-      print(token.card.brand);
+      Stripe.PaymentMethod pm = await Stripe.StripePayment.createPaymentMethod(
+          Stripe.PaymentMethodRequest(card: cc));
+
+      await Api.addCreditCard(userProvider.email, pm.id);
+      EasyLoading.dismiss();
+      EasyLoading.showSuccess("Card added");
+      Navigator.of(context).pop();
     } catch (e) {
-      print(e);
+      print(e["message"]);
+      EasyLoading.showError(e["message"]);
     }
+  }
+
+  String validate() {
+    String errorMessage;
+    String number = numberController.text.trim();
+    String cvv = cvvController.text.trim();
+    String holderName = holderNameController.text.trim();
+
+    if (number == "" ||
+        cvv == "" ||
+        holderName == "" ||
+        card.expiryDate == null) {
+      errorMessage = "All fields are required";
+      return errorMessage;
+    }
+
+    return errorMessage;
   }
 
   @override

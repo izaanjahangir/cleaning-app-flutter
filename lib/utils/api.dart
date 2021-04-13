@@ -11,7 +11,23 @@ class Api {
 
     http.Response response =
         await http.post(url, headers: headers, body: jsonEncode(body));
-    print(response.body);
+
+    dynamic json = jsonDecode(response.body);
+
+    if (response.statusCode == 200) {
+      return json;
+    } else {
+      throw {"message": json["message"]};
+    }
+  }
+
+  static Future addCreditCard(String email, String token) async {
+    Uri url = Uri.parse(BASE_URL + "/add-card");
+    Map body = {"email": email, "token": token};
+    Map<String, String> headers = {"Content-type": "application/json"};
+
+    http.Response response =
+        await http.post(url, headers: headers, body: jsonEncode(body));
 
     dynamic json = jsonDecode(response.body);
 
