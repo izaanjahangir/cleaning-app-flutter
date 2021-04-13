@@ -76,7 +76,9 @@ class _BookJobStep4State extends State<BookJobStep4> {
           "id": value.id,
           "number": data["last4"],
           "holderName": "izaan jahangir",
-          "brand": data["brand"]
+          "brand": data["brand"],
+          "expiryMonth": data["expiryMonth"],
+          "expiryYear": data["expiryYear"]
         };
 
         newCards.add(newCard);
@@ -166,7 +168,7 @@ class _BookJobStep4State extends State<BookJobStep4> {
                                   ],
                                 ),
                                 SizedBox(
-                                  height: 10,
+                                  height: 20,
                                 ),
                                 SelectCardSection(
                                   cards: cards,
