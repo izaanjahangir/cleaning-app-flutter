@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cleaning_app/components/button/button.dart';
 import 'package:cleaning_app/config/theme_colors.dart';
 import 'package:cleaning_app/models/job.dart';
@@ -5,6 +7,7 @@ import 'package:cleaning_app/screens/add_card/add_card.dart';
 import 'package:cleaning_app/screens/book_job_step_4/details.dart';
 import 'package:cleaning_app/screens/book_job_step_4/select_card_section.dart';
 import 'package:cleaning_app/utils/helpers.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -19,12 +22,9 @@ class BookJobStep4 extends StatefulWidget {
 }
 
 class _BookJobStep4State extends State<BookJobStep4> {
-  List<Map> cards = [
-    {"id": 0, "number": "4111111111111111", "holderName": "izaan jahangir"},
-    {"id": 1, "number": "4111111111111111", "holderName": "izaan jahangir"},
-    {"id": 2, "number": "4111111111111111", "holderName": "izaan jahangir"},
-  ];
+  List<Map> cards = [];
   Map selectedCard;
+  StreamSubscription ss;
 
   Widget renderChipButton(BuildContext context) {
     return ClipRRect(
@@ -53,6 +53,47 @@ class _BookJobStep4State extends State<BookJobStep4> {
         ),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    cardsListener();
+
+    super.initState();
+  }
+
+  cardsListener() {
+    Stream collectionStream =
+        FirebaseFirestore.instance.collection('cards').snapshots();
+    ss = collectionStream.listen((querySnapshot) {
+      QuerySnapshot qs = querySnapshot;
+      List<Map> newCards = [];
+
+      qs.docs.asMap().forEach((key, value) {
+        Map data = value.data();
+
+        Map newCard = {
+          "id": value.id,
+          "number": data["last4"],
+          "holderName": "izaan jahangir",
+          "brand": data["brand"]
+        };
+
+        newCards.add(newCard);
+      });
+
+      setState(() {
+        print("setting state");
+        cards = newCards;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    ss.cancel();
+
+    super.dispose();
   }
 
   @override

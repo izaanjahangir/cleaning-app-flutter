@@ -45,12 +45,19 @@ class SelectCardSection extends StatelessWidget {
                   ),
                   Expanded(
                     child: Text(
-                      Formatter.formatCreditCard(item["number"]),
+                      Formatter.maskCreditCard(item["number"]),
                       style: TextStyle(fontSize: 16),
                     ),
                   ),
-                  SvgPicture.asset("assets/icons/credit-card.svg",
-                      width: 25, semanticsLabel: 'Acme Logo')
+                  if (item["brand"] == "mastercard")
+                    SvgPicture.asset("assets/icons/mastercard.svg",
+                        width: 25, semanticsLabel: 'Acme Logo')
+                  else if (item["brand"] == "visa")
+                    SvgPicture.asset("assets/icons/visa.svg",
+                        width: 25, semanticsLabel: 'Acme Logo')
+                  else
+                    SvgPicture.asset("assets/icons/credit-card.svg",
+                        width: 25, semanticsLabel: 'Acme Logo')
                 ],
               ),
             ),

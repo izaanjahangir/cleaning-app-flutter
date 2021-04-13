@@ -16,4 +16,10 @@ class Formatter {
 
     return masked;
   }
+
+  static String maskCreditCard(last4) {
+    final String maskedText = "**** **** **** ";
+
+    return maskedText + last4;
+  }
 }
