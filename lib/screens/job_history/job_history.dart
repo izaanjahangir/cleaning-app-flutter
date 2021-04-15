@@ -8,6 +8,7 @@ import "package:cleaning_app/components/text_heading/text_heading.dart";
 import "package:cleaning_app/screens/job_history/job_history_item.dart";
 import "package:cleaning_app/models/job.dart";
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class JobHistory extends StatefulWidget {
   static String screenName = "job-history";
@@ -29,7 +30,12 @@ class _JobHistoryState extends State<JobHistory> {
     try {
       EasyLoading.show(status: 'loading');
 
-      QuerySnapshot data = await FirebaseHelpers.getCollection("jobs");
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      String userUid = prefs.getString("userUid");
+
+      QuerySnapshot data =
+          await FirebaseHelpers.getCollectionWhereUser("jobs", userUid);
       final List<Job> newJobs = [];
 
       data.docs.forEach((element) {
