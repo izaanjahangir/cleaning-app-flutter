@@ -77,6 +77,7 @@ class _BookJobStep4State extends State<BookJobStep4> {
     Stream collectionStream = FirebaseFirestore.instance
         .collection('cards')
         .where("user", isEqualTo: userUid)
+        .orderBy("addedOn", descending: true)
         .snapshots();
     ss = collectionStream.listen((querySnapshot) {
       QuerySnapshot qs = querySnapshot;
