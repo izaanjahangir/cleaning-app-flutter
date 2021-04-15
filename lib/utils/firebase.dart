@@ -92,6 +92,7 @@ class FirebaseHelpers {
 
       return data;
     } catch (e) {
+      print(e);
       throw {"message": e.message};
     }
   }

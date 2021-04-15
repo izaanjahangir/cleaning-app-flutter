@@ -54,24 +54,24 @@ class Home extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      HomeOption(
-                        onTab: () {
-                          Navigator.pushNamed(context, Settings.screenName);
-                        },
-                        label: "Settings",
-                      ),
-                      HomeOption(
-                        onTab: () {},
-                        label: "Promotions",
-                      ),
-                    ],
-                  )
+                  // SizedBox(
+                  //   height: 10,
+                  // ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     HomeOption(
+                  //       onTab: () {
+                  //         Navigator.pushNamed(context, Settings.screenName);
+                  //       },
+                  //       label: "Settings",
+                  //     ),
+                  //     HomeOption(
+                  //       onTab: () {},
+                  //       label: "Promotions",
+                  //     ),
+                  //   ],
+                  // )
                 ],
               ),
             )

@@ -3,7 +3,7 @@ class Job {
   DateTime time;
   DateTime addedOn;
   int noOfBedrooms;
-  List<int> extras;
+  List<dynamic> extras;
   String instructions;
   Map location;
 

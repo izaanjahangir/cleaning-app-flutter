@@ -46,6 +46,7 @@ class _JobHistoryState extends State<JobHistory> {
             time: DateTime.parse(d["time"].toDate().toString()),
             addedOn: DateTime.parse(d["addedOn"].toDate().toString()),
             instructions: d["instructions"],
+            extras: d["extras"],
             location: {
               "latitude": d["location"].latitude,
               "longitude": d["location"].longitude

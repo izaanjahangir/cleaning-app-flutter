@@ -33,6 +33,8 @@ class _JobHistoryDetailsState extends State<JobHistoryDetails> {
       zoom: 16,
     );
 
+    print(job.extras);
+
     return SafeArea(
       child: Scaffold(
         body: SafeArea(
