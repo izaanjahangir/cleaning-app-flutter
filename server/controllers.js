@@ -67,6 +67,7 @@ controllers.addCard = async function (req, res) {
       expiryMonth: paymentMethod.card.exp_month,
       expiryYear: paymentMethod.card.exp_year,
       last4: paymentMethod.card.last4,
+      addedOn: admin.firestore.FieldValue.serverTimestamp(),
     };
 
     await firebase.addDocument("cards", card);
@@ -139,9 +140,11 @@ controllers.handlePay = async function (req, res) {
       paymentMethod: payment.payment_method,
       card: card.uid,
       status: payment.status,
+      addedOn: admin.firestore.FieldValue.serverTimestamp(),
     };
 
     await firebase.updateDocument("transactions", payment.id, transaction);
+
     const job = {
       location: new admin.firestore.GeoPoint(
         req.body.location["latitude"],
@@ -152,6 +155,8 @@ controllers.handlePay = async function (req, res) {
       noOfBedrooms: req.body.noOfBedrooms,
       time: admin.firestore.Timestamp.fromDate(new Date(req.body.time)),
       addedOn: admin.firestore.FieldValue.serverTimestamp(),
+      paidThrough: card.uid,
+      user: card.data.user,
     };
 
     await firebase.addDocument("jobs", job);
