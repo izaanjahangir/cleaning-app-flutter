@@ -50,7 +50,7 @@ class _JobHistoryDetailsState extends State<JobHistoryDetails> {
                           child: Column(
                             children: [
                               SizedBox(
-                                height: height * 0.3,
+                                height: height * 0.4,
                                 child: GoogleMap(
                                   scrollGesturesEnabled: false,
                                   markers: markers,
