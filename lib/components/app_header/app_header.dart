@@ -56,9 +56,9 @@ class AppHeader extends StatelessWidget {
                       return;
                     }
 
-                    UserProvider userProvider =
-                        Provider.of<UserProvider>(context);
-                    userProvider.clear();
+                    // UserProvider userProvider =
+                    //     Provider.of<UserProvider>(context);
+                    // userProvider.clear();
 
                     Navigator.of(context).pushNamedAndRemoveUntil(
                         Login.screenName, (Route<dynamic> route) => false);

@@ -5,6 +5,7 @@ import 'package:cleaning_app/screens/register/register.dart';
 import 'package:cleaning_app/utils/firebase.dart';
 import 'package:cleaning_app/utils/helpers.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import "package:cleaning_app/screens/home/home.dart";
 import "package:cleaning_app/config/theme_colors.dart";
@@ -39,6 +40,10 @@ class Login extends StatelessWidget {
           Provider.of<UserProvider>(context, listen: false);
       userProvider.update(
           uid: user.uid, email: user.email, fullName: user.fullName);
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      await prefs.setString('userUid', user.uid);
 
       Navigator.pushReplacementNamed(context, Home.screenName);
       EasyLoading.dismiss();

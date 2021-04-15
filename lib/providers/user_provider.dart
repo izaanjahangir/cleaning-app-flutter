@@ -33,7 +33,7 @@ class UserProvider with ChangeNotifier {
     return _fullName;
   }
 
-  String get emal {
-    return _email;
+  String get uid {
+    return _uid;
   }
 }

@@ -3,15 +3,20 @@ import 'dart:async';
 import 'package:cleaning_app/components/button/button.dart';
 import 'package:cleaning_app/config/theme_colors.dart';
 import 'package:cleaning_app/models/job.dart';
+import 'package:cleaning_app/providers/user_provider.dart';
 import 'package:cleaning_app/screens/add_card/add_card.dart';
 import 'package:cleaning_app/screens/book_job_step_4/details.dart';
 import 'package:cleaning_app/screens/book_job_step_4/select_card_section.dart';
+import 'package:cleaning_app/utils/firebase.dart';
 import 'package:cleaning_app/utils/helpers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import "package:cleaning_app/components/app_header/app_header.dart";
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:touchable_opacity/touchable_opacity.dart';
 
 class BookJobStep4 extends StatefulWidget {
@@ -62,9 +67,15 @@ class _BookJobStep4State extends State<BookJobStep4> {
     super.initState();
   }
 
-  cardsListener() {
-    Stream collectionStream =
-        FirebaseFirestore.instance.collection('cards').snapshots();
+  cardsListener() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    String userUid = prefs.getString("userUid");
+
+    Stream collectionStream = FirebaseFirestore.instance
+        .collection('cards')
+        .where("user", isEqualTo: userUid)
+        .snapshots();
     ss = collectionStream.listen((querySnapshot) {
       QuerySnapshot qs = querySnapshot;
       List<Map> newCards = [];
@@ -99,6 +110,8 @@ class _BookJobStep4State extends State<BookJobStep4> {
 
   @override
   Widget build(BuildContext context) {
+    UserProvider userProvider = Provider.of<UserProvider>(context);
+
     final Map<String, dynamic> arguments =
         ModalRoute.of(context).settings.arguments;
     final Job job = Job(
@@ -111,12 +124,25 @@ class _BookJobStep4State extends State<BookJobStep4> {
         },
         time: arguments["jobTime"]);
 
-    void handleConfirm() {
-      print(job.location);
-      print(job.instructions);
-      print(job.extras);
-      print(job.noOfBedrooms);
-      print(job.time);
+    void handleConfirm() async {
+      try {
+        EasyLoading.show(status: 'loading');
+        Map<String, dynamic> payload = {
+          "location":
+              GeoPoint(job.location["latitude"], job.location["longitude"]),
+          "instructions": job.instructions,
+          "extras": job.extras,
+          "noOfBedrooms": job.noOfBedrooms,
+          "time": job.time,
+          "addedOn": Timestamp.now()
+        };
+        await FirebaseHelpers.addDocument("jobs", payload);
+        EasyLoading.dismiss();
+        EasyLoading.showSuccess("Job added");
+      } catch (e) {
+        print(e);
+        EasyLoading.showError(e["message"]);
+      }
     }
 
     return SafeArea(
