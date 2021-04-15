@@ -7,6 +7,8 @@ import 'package:cleaning_app/providers/user_provider.dart';
 import 'package:cleaning_app/screens/add_card/add_card.dart';
 import 'package:cleaning_app/screens/book_job_step_4/details.dart';
 import 'package:cleaning_app/screens/book_job_step_4/select_card_section.dart';
+import 'package:cleaning_app/screens/home/home.dart';
+import 'package:cleaning_app/utils/api.dart';
 import 'package:cleaning_app/utils/firebase.dart';
 import 'package:cleaning_app/utils/helpers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -110,7 +112,7 @@ class _BookJobStep4State extends State<BookJobStep4> {
 
   @override
   Widget build(BuildContext context) {
-    UserProvider userProvider = Provider.of<UserProvider>(context);
+    // UserProvider userProvider = Provider.of<UserProvider>(context);
 
     final Map<String, dynamic> arguments =
         ModalRoute.of(context).settings.arguments;
@@ -124,23 +126,50 @@ class _BookJobStep4State extends State<BookJobStep4> {
         },
         time: arguments["jobTime"]);
 
-    void handleConfirm() async {
+    // void handleConfirm() async {
+    //   try {
+    //     EasyLoading.show(status: 'loading');
+    //     Map<String, dynamic> payload = {
+    //       "location":
+    //           GeoPoint(job.location["latitude"], job.location["longitude"]),
+    //       "instructions": job.instructions,
+    //       "extras": job.extras,
+    //       "noOfBedrooms": job.noOfBedrooms,
+    //       "time": job.time,
+    //       "addedOn": Timestamp.now()
+    //     };
+    //     await FirebaseHelpers.addDocument("jobs", payload);
+    //     EasyLoading.dismiss();
+    //     EasyLoading.showSuccess("Job added");
+    //   } catch (e) {
+    //     print(e);
+    //     EasyLoading.showError(e["message"]);
+    //   }
+    // }
+
+    handleSubmit() async {
       try {
         EasyLoading.show(status: 'loading');
-        Map<String, dynamic> payload = {
-          "location":
-              GeoPoint(job.location["latitude"], job.location["longitude"]),
+        Map body = {
+          "card": selectedCard["id"],
+          "location": {
+            "latitude": job.location["latitude"],
+            "longitude": job.location["longitude"]
+          },
           "instructions": job.instructions,
           "extras": job.extras,
           "noOfBedrooms": job.noOfBedrooms,
-          "time": job.time,
-          "addedOn": Timestamp.now()
+          "time": job.time.toIso8601String(),
+          "amount": 10
         };
-        await FirebaseHelpers.addDocument("jobs", payload);
+
+        await Api.pay(body);
         EasyLoading.dismiss();
-        EasyLoading.showSuccess("Job added");
+        EasyLoading.showSuccess("Success");
+
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            Home.screenName, (Route<dynamic> route) => false);
       } catch (e) {
-        print(e);
         EasyLoading.showError(e["message"]);
       }
     }
@@ -236,7 +265,7 @@ class _BookJobStep4State extends State<BookJobStep4> {
                           label: "Back"),
                       Button(
                           onPressed: () {
-                            handleConfirm();
+                            handleSubmit();
                           },
                           label: "Confirm")
                     ],

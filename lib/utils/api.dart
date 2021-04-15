@@ -37,4 +37,29 @@ class Api {
       throw {"message": json["message"]};
     }
   }
+
+  static Future pay(Map body) async {
+    try {
+      Uri url = Uri.parse(BASE_URL + "/pay");
+      Map<String, String> headers = {"Content-type": "application/json"};
+
+      print(body);
+      http.Response response =
+          await http.post(url, headers: headers, body: jsonEncode(body));
+      print("encoded");
+
+      dynamic json = jsonDecode(response.body);
+
+      print("decoded");
+
+      if (response.statusCode == 200) {
+        return json;
+      }
+
+      throw {"message": json["message"]};
+    } catch (e) {
+      print(e);
+      throw {"message": e["message"]};
+    }
+  }
 }

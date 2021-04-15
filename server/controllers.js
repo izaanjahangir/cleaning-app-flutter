@@ -101,7 +101,7 @@ controllers.handlePay = async function (req, res) {
       throw new Error("Latitude is required");
     }
 
-    if (!req.body.longitude) {
+    if (!req.body.location.longitude) {
       throw new Error("Longitude is required");
     }
 
