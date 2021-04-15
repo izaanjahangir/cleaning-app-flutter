@@ -1,3 +1,4 @@
+const admin = require("firebase-admin");
 const firebase = require("./firebase");
 const helpers = require("./helpers");
 const keys = require("./keys");
@@ -92,12 +93,33 @@ controllers.handlePay = async function (req, res) {
       throw new Error("Amount is required");
     }
 
+    if (!req.body.location) {
+      throw new Error("Location is required");
+    }
+
+    if (!req.body.location.latitude) {
+      throw new Error("Latitude is required");
+    }
+
+    if (!req.body.longitude) {
+      throw new Error("Longitude is required");
+    }
+
+    if (!req.body.noOfBedrooms) {
+      throw new Error("Number of bedrooms is required");
+    }
+
+    if (!req.body.time) {
+      throw new Error("Time of bedrooms is required");
+    }
+
     const payload = {
       card: req.body.card,
       amount: req.body.amount,
     };
 
     const card = await firebase.getDocument("cards", payload.card);
+
     const paymentIntent = await stripe.paymentIntents.create({
       amount: helpers.dollarToCents(payload.amount),
       currency: "usd",
@@ -120,6 +142,19 @@ controllers.handlePay = async function (req, res) {
     };
 
     await firebase.updateDocument("transactions", payment.id, transaction);
+    const job = {
+      location: new admin.firestore.GeoPoint(
+        req.body.location["latitude"],
+        req.body.location["longitude"]
+      ),
+      instructions: req.body.instructions,
+      extras: req.body.extras,
+      noOfBedrooms: req.body.noOfBedrooms,
+      time: admin.firestore.Timestamp.fromDate(new Date(req.body.time)),
+      addedOn: admin.firestore.FieldValue.serverTimestamp(),
+    };
+
+    await firebase.addDocument("jobs", job);
 
     res.json({
       data: { transaction },
