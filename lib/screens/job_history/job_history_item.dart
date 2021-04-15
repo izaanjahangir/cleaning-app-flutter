@@ -1,4 +1,5 @@
 import 'package:cleaning_app/models/job.dart';
+import 'package:cleaning_app/utils/date_helpers.dart';
 import "package:flutter/material.dart";
 import 'package:cleaning_app/config/theme_colors.dart';
 
@@ -9,12 +10,14 @@ class JobHistoryItem extends StatelessWidget {
   JobHistoryItem({@required this.item, @required this.onTab});
 
   Widget renderDateChip() {
+    String formattedDate = DateHelpers.format(item.time);
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(15),
       child: Container(
         color: ThemeColors.blue,
         padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-        child: Text("01-March-2021",
+        child: Text(formattedDate,
             style: TextStyle(
               fontSize: 10,
               color: ThemeColors.white,

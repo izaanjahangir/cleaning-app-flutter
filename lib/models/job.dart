@@ -1,6 +1,7 @@
 class Job {
   String ref;
   DateTime time;
+  DateTime addedOn;
   int noOfBedrooms;
   List<int> extras;
   String instructions;
@@ -12,5 +13,6 @@ class Job {
       this.extras = const [],
       this.instructions,
       this.location,
-      this.ref});
+      this.ref,
+      this.addedOn});
 }

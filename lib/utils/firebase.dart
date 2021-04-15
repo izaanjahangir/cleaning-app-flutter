@@ -72,6 +72,18 @@ class FirebaseHelpers {
     }
   }
 
+  static getCollection(String collection) async {
+    try {
+      CollectionReference users =
+          FirebaseFirestore.instance.collection(collection);
+      QuerySnapshot data = await users.get();
+
+      return data;
+    } catch (e) {
+      throw {"message": e.message};
+    }
+  }
+
   static setDocument(
       String collection, String doc, Map<String, dynamic> data) async {
     CollectionReference collectionReference =
